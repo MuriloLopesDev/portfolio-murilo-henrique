@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { projects } from '../data/portfolioData';
 import type { Project } from '../types';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { FolderGit2, ArrowRight, CheckCircle2, Image as ImageIcon } from 'lucide-react';
+import { FolderGit2, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -33,16 +33,17 @@ export const Projects: React.FC = () => {
               className="glass-card glass-card-hover rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group"
             >
               <div>
-                {/* Project Cover Placeholder */}
-                <div className="relative aspect-video w-full bg-slate-900 border-b border-slate-800/80 flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-800 border border-slate-700/80 flex items-center justify-center text-cyan-400 mb-3 shadow-inner group-hover:scale-105 transition-transform">
-                    <ImageIcon className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-sm font-bold text-white px-4">{proj.name}</h3>
-                  <span className="text-[11px] text-slate-400 mt-1 font-medium">{proj.category}</span>
-                  <span className="mt-2 text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800/90 text-slate-400 border border-slate-700/60">
-                    Imagem do projeto será adicionada
-                  </span>
+                {/* Project Cover */}
+                <div className="relative aspect-video w-full bg-slate-900 border-b border-slate-800/80 overflow-hidden">
+                  <img
+                    src={proj.coverImage.src}
+                    alt={proj.coverImage.alt}
+                    width={proj.coverImage.width}
+                    height={proj.coverImage.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
 
                   <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-950/90 text-cyan-400 border border-cyan-500/30">
                     {proj.category}

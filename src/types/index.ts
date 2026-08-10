@@ -1,6 +1,14 @@
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export interface ProjectGalleryItem {
   screenTitle: string;
   description: string;
+  image: ProjectImage;
 }
 
 export interface Project {
@@ -16,6 +24,7 @@ export interface Project {
   technicalChallenges: string[];
   result: string;
   status: string;
+  coverImage: ProjectImage;
   gallery: ProjectGalleryItem[];
   demoLink?: string;
   repoLink?: string;

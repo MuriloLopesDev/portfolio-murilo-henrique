@@ -59,16 +59,17 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
         {/* Modal Scrollable Content */}
         <div className="p-6 sm:p-8 space-y-8 overflow-y-auto flex-1 text-slate-300 text-sm leading-relaxed">
           
-          {/* Main Hero Cover Placeholder */}
-          <div className="relative aspect-video sm:aspect-[21/9] w-full rounded-xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center p-6 text-center overflow-hidden group">
-            <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400 mb-3 shadow-inner">
-              <ImageIcon className="w-8 h-8" />
-            </div>
-            <h3 className="text-base font-bold text-white">{project.name}</h3>
-            <p className="text-xs text-slate-400 mt-1 font-medium">Capa Principal da Aplicação</p>
-            <span className="mt-2 text-[11px] px-3 py-1 rounded-full bg-slate-800/90 text-slate-400 border border-slate-700/60">
-              Imagem do projeto será adicionada
-            </span>
+          {/* Main Hero Cover */}
+          <div className="relative aspect-video sm:aspect-[21/9] w-full rounded-xl bg-slate-900 border border-slate-800 overflow-hidden group">
+            <img
+              src={project.coverImage.src}
+              alt={project.coverImage.alt}
+              width={project.coverImage.width}
+              height={project.coverImage.height}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
           </div>
 
           {/* Quick Info Grid */}
@@ -185,7 +186,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             </div>
           </div>
 
-          {/* Gallery with Placeholders */}
+          {/* Project Gallery */}
           <div className="space-y-4 pt-4 border-t border-slate-800">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-white flex items-center space-x-2">
@@ -196,15 +197,21 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {project.gallery.map((screen, idx) => (
+              {project.gallery.map((screen) => (
                 <div
-                  key={idx}
+                  key={screen.image.src}
                   className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2 flex flex-col justify-between"
                 >
-                  <div className="aspect-video w-full rounded-lg bg-slate-950 border border-slate-800/80 flex flex-col items-center justify-center p-3 text-center">
-                    <ImageIcon className="w-6 h-6 text-slate-600 mb-1" />
-                    <span className="text-xs font-semibold text-slate-300">{screen.screenTitle}</span>
-                    <span className="text-[10px] text-slate-500 mt-1">Imagem do projeto será adicionada</span>
+                  <div className="aspect-video w-full rounded-lg bg-slate-950 border border-slate-800/80 overflow-hidden">
+                    <img
+                      src={screen.image.src}
+                      alt={screen.image.alt}
+                      width={screen.image.width}
+                      height={screen.image.height}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-white">{screen.screenTitle}</h4>

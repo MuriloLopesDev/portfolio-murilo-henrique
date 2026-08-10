@@ -1,4 +1,4 @@
-import type { PersonalInfo, Experience, Project, TechCategory, Differentiator } from '../types';
+import type { PersonalInfo, Experience, Project, ProjectImage, TechCategory, Differentiator } from '../types';
 
 export const personalInfo: PersonalInfo = {
   name: 'Murilo Henrique',
@@ -34,6 +34,72 @@ export const coreTechnologies = [
   'APIs REST',
   'Git',
 ] as const;
+
+const weddingProjectImages = {
+  home: {
+    src: '/projects/plataforma-casamento/home.webp',
+    alt: 'Página inicial da plataforma de casamento de Murilo e Mirelle',
+    width: 1891,
+    height: 954,
+  },
+  attendanceConfirmation: {
+    src: '/projects/plataforma-casamento/confirmacao-presenca.webp',
+    alt: 'Formulário de confirmação de presença com campo para acompanhante',
+    width: 1894,
+    height: 956,
+  },
+  eventInformation: {
+    src: '/projects/plataforma-casamento/informacoes.webp',
+    alt: 'Página de informações do casamento com data, horários e locais',
+    width: 1894,
+    height: 952,
+  },
+  giftList: {
+    src: '/projects/plataforma-casamento/lista-presentes.webp',
+    alt: 'Lista virtual de presentes da plataforma de casamento',
+    width: 1890,
+    height: 956,
+  },
+  payment: {
+    src: '/projects/plataforma-casamento/pagamento.webp',
+    alt: 'Tela de finalização de presente com pagamento pelo Mercado Pago',
+    width: 1889,
+    height: 952,
+  },
+} satisfies Record<string, ProjectImage>;
+
+const alessatProjectImages = {
+  login: {
+    src: '/projects/grupo-alessat/login.webp',
+    alt: 'Tela de login do sistema de monitoramento do Grupo Alessat',
+    width: 784,
+    height: 555,
+  },
+  fleetRegistration: {
+    src: '/projects/grupo-alessat/cadastro-frota.webp',
+    alt: 'Modal de cadastro de frota com seleção de veículos e canais',
+    width: 1912,
+    height: 1003,
+  },
+  vehicleCameras: {
+    src: '/projects/grupo-alessat/cameras-veiculo.webp',
+    alt: 'Lista de veículos e canais com uma câmera de monitoramento aberta',
+    width: 1915,
+    height: 1003,
+  },
+  openMosaic: {
+    src: '/projects/grupo-alessat/mosaico-aberto.webp',
+    alt: 'Mosaico de monitoramento com seis transmissões de câmeras abertas',
+    width: 1903,
+    height: 1009,
+  },
+  emptyMosaic: {
+    src: '/projects/grupo-alessat/estado-sem-cameras.webp',
+    alt: 'Estado inicial do mosaico sem câmeras selecionadas',
+    width: 1903,
+    height: 1016,
+  },
+} satisfies Record<string, ProjectImage>;
 
 export const experiences: Experience[] = [
   {
@@ -119,13 +185,13 @@ export const projects: Project[] = [
     ],
     result: 'Uma plataforma centralizada, responsiva e personalizada para facilitar a comunicação com convidados, o controle de presenças e a organização dos presentes.',
     status: 'Projeto desenvolvido e publicado',
+    coverImage: weddingProjectImages.home,
     gallery: [
-      { screenTitle: 'Página inicial', description: 'Apresentação visual do evento e contagem regressiva' },
-      { screenTitle: 'Confirmação de presença', description: 'Formulário RSVP simplificado para o convidado e acompanhantes' },
-      { screenTitle: 'Informações do evento', description: 'Detalhes da cerimônia, recepção e mapas de acesso' },
-      { screenTitle: 'Lista de presentes', description: 'Catálogo de presentes virtuais com opção de contribuição' },
-      { screenTitle: 'Processo de pagamento', description: 'Checkout integrado e seguro via Mercado Pago' },
-      { screenTitle: 'Painel administrativo', description: 'Dashboard dos noivos para gestão de RSVP e recebimentos' },
+      { screenTitle: 'Página inicial', description: 'Apresentação visual do evento e contagem regressiva', image: weddingProjectImages.home },
+      { screenTitle: 'Confirmação de presença', description: 'Formulário RSVP simplificado para o convidado e acompanhantes', image: weddingProjectImages.attendanceConfirmation },
+      { screenTitle: 'Informações do evento', description: 'Detalhes da cerimônia, recepção e mapas de acesso', image: weddingProjectImages.eventInformation },
+      { screenTitle: 'Lista de presentes', description: 'Catálogo de presentes virtuais com opção de contribuição', image: weddingProjectImages.giftList },
+      { screenTitle: 'Processo de pagamento', description: 'Checkout integrado e seguro via Mercado Pago', image: weddingProjectImages.payment },
     ],
   },
   {
@@ -167,13 +233,13 @@ export const projects: Project[] = [
     ],
     result: 'Uma aplicação desktop organizada e funcional, preparada para facilitar a visualização e o gerenciamento das transmissões dos veículos.',
     status: 'Projeto desenvolvido para cliente',
+    coverImage: alessatProjectImages.openMosaic,
     gallery: [
-      { screenTitle: 'Login', description: 'Acesso restrito para operadores autorizados' },
-      { screenTitle: 'Tela inicial', description: 'Dashboard principal com visão geral do sistema' },
-      { screenTitle: 'Listagem de veículos', description: 'Painel de seleção e filtro de frotas ativas' },
-      { screenTitle: 'Visualização em mosaico', description: 'Grade multi-câmeras em tempo real' },
-      { screenTitle: 'Reprodução de vídeos', description: 'Player com controle de áudio e visualização ampliada' },
-      { screenTitle: 'Estados de carregamento e indisponibilidade', description: 'Tratamento visual amigável durante oscilações de rede' },
+      { screenTitle: 'Login', description: 'Acesso restrito para operadores autorizados', image: alessatProjectImages.login },
+      { screenTitle: 'Cadastro de frotas', description: 'Seleção de veículos e canais para organização dos mosaicos', image: alessatProjectImages.fleetRegistration },
+      { screenTitle: 'Câmeras por veículo', description: 'Painel de seleção de veículos e canais disponíveis', image: alessatProjectImages.vehicleCameras },
+      { screenTitle: 'Visualização em mosaico', description: 'Grade multi-câmeras em tempo real', image: alessatProjectImages.openMosaic },
+      { screenTitle: 'Estado sem câmeras', description: 'Orientação exibida antes da seleção de veículos e canais', image: alessatProjectImages.emptyMosaic },
     ],
   },
 ];
