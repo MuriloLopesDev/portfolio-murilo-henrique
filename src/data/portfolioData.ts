@@ -3,14 +3,15 @@ import type { PersonalInfo, Experience, Project, TechCategory, Differentiator } 
 export const personalInfo: PersonalInfo = {
   name: 'Murilo Henrique',
   role: 'Desenvolvedor de Software',
-  experienceYears: 'Aproximadamente 4 anos',
-  experienceYearsShort: '~4 anos',
+  careerStartYear: '2019',
+  experienceLabel: 'Desde 2019',
+  experienceStatement: 'Desenvolvedor de Software com experiência profissional desde 2019.',
   location: 'São José do Rio Preto, São Paulo',
   locationShort: 'São José do Rio Preto, SP',
   availability: 'Disponível para oportunidades remotas ou presenciais',
-  bio: 'Desenvolvedor de software com experiência na criação, manutenção e evolução de sistemas web, mobile e desktop. Atuo com foco na resolução prática de problemas, investigando causas raiz de falhas e aplicando regras de negócio para entregar soluções confiáveis, bem estruturadas e fáceis de utilizar.',
+  bio: 'Desenvolvedor de Software com experiência profissional desde 2019. Atuo na criação, manutenção e evolução de sistemas web, mobile e desktop, com foco na resolução prática de problemas, investigação de causas raiz de falhas e aplicação de regras de negócio para entregar soluções confiáveis, bem estruturadas e fáceis de utilizar.',
   heroSubtitle: 'Transformo necessidades reais em aplicações web, mobile e desktop eficientes, confiáveis e fáceis de usar.',
-  heroDescription: 'Desenvolvedor com experiência na criação, manutenção e evolução de sistemas, atuando desde a análise do problema até a implementação, testes e entrega da solução.',
+  heroDescription: 'Desenvolvedor de Software com experiência profissional desde 2019.',
   linkedin: 'https://linkedin.com/in/murilo-henrique',
   linkedinLabel: 'in/murilo-henrique',
   github: 'https://github.com/murilopes007',
@@ -37,7 +38,7 @@ export const coreTechnologies = [
 export const experiences: Experience[] = [
   {
     company: 'EVOMILK',
-    role: 'Desenvolvedor de Software',
+    role: personalInfo.role,
     period: 'Maio de 2022 — Presente',
     isCurrent: true,
     responsibilities: [
@@ -54,7 +55,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'BELLA CAPRI E AGILE DELIVERY',
-    role: 'Desenvolvedor de Software',
+    role: personalInfo.role,
     period: 'Julho de 2021 — Maio de 2022',
     responsibilities: [
       'Desenvolvimento e manutenção de sistemas voltados para gestão operacional e logística',
@@ -66,7 +67,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'ZANATA INFORMÁTICA',
-    role: 'Desenvolvedor de Software',
+    role: personalInfo.role,
     period: 'Janeiro de 2019 — Julho de 2021',
     responsibilities: [
       'Desenvolvimento de software e suporte técnico especializado para sistemas ERP/gestão',

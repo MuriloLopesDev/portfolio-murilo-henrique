@@ -28,7 +28,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   const handleCopySummary = () => {
     const text = `
-${personalInfo.name} — ${personalInfo.role} (${personalInfo.experienceYearsShort} de experiência)
+${personalInfo.name} — ${personalInfo.experienceStatement}
 Localização: ${personalInfo.location} (${personalInfo.availability})
 E-mail: ${personalInfo.email}
 LinkedIn: ${personalInfo.linkedin}
@@ -54,7 +54,7 @@ ${coreTechnologies.join(', ')}.
       `CURRÍCULO PROFISSIONAL - ${personalInfo.name.toUpperCase()}\n` +
       `==================================================\n\n` +
       `Cargo: ${personalInfo.role}\n` +
-      `Experiência: ${personalInfo.experienceYearsShort.replace('anos', 'Anos')}\n` +
+      `Experiência: ${personalInfo.experienceLabel}\n` +
       `Localização: ${personalInfo.location}\n` +
       `Disponibilidade: ${personalInfo.availability}\n` +
       `E-mail: ${personalInfo.email}\n` +
@@ -112,7 +112,7 @@ ${coreTechnologies.join(', ')}.
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
               <div>
                 <h3 className="text-lg font-bold text-white">{personalInfo.name}</h3>
-                <p className="text-xs text-cyan-400 font-semibold">{personalInfo.role} ({personalInfo.experienceYearsShort} exp)</p>
+                <p className="text-xs text-cyan-400 font-semibold">{personalInfo.role} (desde {personalInfo.careerStartYear})</p>
               </div>
               <span className="text-xs px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-medium">
                 {personalInfo.availability}

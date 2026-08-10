@@ -48,8 +48,9 @@ export interface Differentiator {
 export interface PersonalInfo {
   name: string;
   role: string;
-  experienceYears: string;
-  experienceYearsShort: string;
+  careerStartYear: string;
+  experienceLabel: string;
+  experienceStatement: string;
   location: string;
   locationShort: string;
   availability: string;

@@ -147,7 +147,7 @@ export const Hero: React.FC = () => {
                 {/* Quick Highlights Grid */}
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
-                    <span className="block text-xl font-extrabold text-cyan-400">{personalInfo.experienceYearsShort}</span>
+                    <span className="block text-xl font-extrabold text-cyan-400">{personalInfo.experienceLabel}</span>
                     <span className="text-[12px] text-slate-400 font-medium">Experiência Real</span>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
