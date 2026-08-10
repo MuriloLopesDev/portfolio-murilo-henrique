@@ -12,6 +12,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
+  const professionalInitials = personalInfo.name
+    .split(/\s+/)
+    .map((namePart) => namePart[0])
+    .join('')
+    .slice(0, 2);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
             className="group flex items-center space-x-2 text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-md px-1 py-0.5"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-extrabold text-sm shadow-md group-hover:scale-105 transition-transform">
-              MH
+              {professionalInitials}
             </div>
             <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
               {personalInfo.name}

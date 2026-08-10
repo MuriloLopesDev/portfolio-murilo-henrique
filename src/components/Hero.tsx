@@ -1,5 +1,5 @@
 import React from 'react';
-import { personalInfo, professionalLinks } from '../data/portfolioData';
+import { personalInfo, professionalLinks, professionalPhoto } from '../data/portfolioData';
 import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Smartphone, Monitor, Globe } from 'lucide-react';
 import { getPreferredScrollBehavior } from '../utils/motion';
 
@@ -135,14 +135,22 @@ export const Hero: React.FC = () => {
               
               <div className="relative glass-card rounded-2xl p-6 sm:p-8 space-y-6">
                 
-                {/* Photo Placeholder / Avatar Card */}
-                <div className="relative aspect-square max-w-[240px] mx-auto rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/60 flex flex-col items-center justify-center p-6 text-center shadow-inner group">
-                  <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-cyan-500/40 flex items-center justify-center shadow-lg mb-3 text-cyan-400 font-extrabold text-2xl tracking-wider">
-                    MH
+                {/* Professional photo card */}
+                <div className="relative aspect-square max-w-[240px] mx-auto overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/60 text-center shadow-inner group">
+                  <img
+                    src={professionalPhoto.src}
+                    alt={professionalPhoto.alt}
+                    width={professionalPhoto.width}
+                    height={professionalPhoto.height}
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                    className="h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent px-5 pb-5 pt-12">
+                    <h3 className="text-white font-bold text-lg">{personalInfo.name}</h3>
+                    <p className="text-slate-300 text-xs mt-0.5">{personalInfo.role}</p>
                   </div>
-                  <h3 className="text-white font-bold text-lg">{personalInfo.name}</h3>
-                  <p className="text-slate-400 text-xs mt-0.5">{personalInfo.role}</p>
-                  <p className="text-slate-500 text-[11px] mt-2 italic">Foto profissional</p>
                 </div>
 
                 {/* Quick Highlights Grid */}

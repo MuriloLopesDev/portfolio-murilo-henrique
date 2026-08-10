@@ -3,9 +3,8 @@ import { coreTechnologies, personalInfo, professionalLinks } from '../data/portf
 export const seoConfig = {
   siteUrlEnvironmentVariable: 'VITE_SITE_URL',
   localSiteUrl: 'http://localhost:3000',
-  title: 'Murilo Henrique | Desenvolvedor de Software',
-  description:
-    'Portfólio de Murilo Henrique, Desenvolvedor de Software com experiência profissional desde 2019 em aplicações web, mobile e desktop.',
+  title: `${personalInfo.name} | ${personalInfo.role}`,
+  description: `Portfólio de ${personalInfo.name}, ${personalInfo.role} com experiência profissional desde 2019 em aplicações web, mobile e desktop.`,
   author: personalInfo.name,
   locale: 'pt_BR',
   language: 'pt-BR',

@@ -1,7 +1,7 @@
 import type { PersonalInfo, Experience, Project, ProjectImage, TechCategory, Differentiator } from '../types';
 
 export const personalInfo: PersonalInfo = {
-  name: 'Murilo Henrique',
+  name: 'Murilo Lopes',
   role: 'Desenvolvedor de Software',
   careerStartYear: '2019',
   experienceLabel: 'Desde 2019',
@@ -13,6 +13,13 @@ export const personalInfo: PersonalInfo = {
   heroSubtitle: 'Transformo necessidades reais em aplicações web, mobile e desktop eficientes, confiáveis e fáceis de usar.',
   heroDescription: 'Desenvolvedor de Software com experiência profissional desde 2019.',
 };
+
+export const professionalPhoto = {
+  src: '/images/profile/murilo-lopes.jpg',
+  alt: `Foto profissional de ${personalInfo.name}`,
+  width: 400,
+  height: 400,
+} as const;
 
 export const professionalLinks = {
   linkedin: {

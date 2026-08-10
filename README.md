@@ -1,4 +1,4 @@
-# Portfólio — Murilo Henrique
+# Portfólio — Murilo Lopes
 
 Portfólio profissional desenvolvido como uma aplicação React de página única.
 
