@@ -1,31 +1,31 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import type { Project } from '../types';
 import { X, CheckCircle2, Cpu, Award, Globe, Layers, Image as ImageIcon, ArrowLeft, Lightbulb } from 'lucide-react';
+import { useAccessibleModal } from '../hooks/useAccessibleModal';
 
 interface ProjectDetailModalProps {
   project: Project | null;
   onClose: () => void;
+  returnFocusTo?: HTMLElement | null;
 }
 
-export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClose }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (project) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [project, onClose]);
+export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
+  project,
+  onClose,
+  returnFocusTo,
+}) => {
+  const dialogRef = useAccessibleModal({
+    isOpen: project !== null,
+    onClose,
+    returnFocusTo,
+  });
 
   if (!project) return null;
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 lg:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto animate-fadeIn"
       onClick={onClose}
       aria-modal="true"
@@ -49,8 +49,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
-            aria-label="Fechar modal"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            aria-label={`Fechar detalhes de ${project.name}`}
+            data-modal-initial-focus
           >
             <X className="w-6 h-6" />
           </button>
@@ -220,7 +221,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
         <div className="sticky bottom-0 z-20 flex items-center justify-between px-6 py-4 bg-[#0d1322] border-t border-slate-800">
           <button
             onClick={onClose}
-            className="inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white rounded-lg transition-colors"
+            className="inline-flex min-h-11 items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white rounded-lg transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Voltar</span>

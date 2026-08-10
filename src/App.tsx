@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -12,14 +12,31 @@ import { ResumeModal } from './components/ResumeModal';
 
 export default function App() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [resumeTrigger, setResumeTrigger] = useState<HTMLButtonElement | null>(null);
+
+  const openResumeModal = useCallback((trigger: HTMLButtonElement) => {
+    setResumeTrigger(trigger);
+    setIsResumeModalOpen(true);
+  }, []);
+
+  const closeResumeModal = useCallback(() => {
+    setIsResumeModalOpen(false);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+      <a
+        href="#main-content"
+        className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-lg bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Pular para o conteúdo
+      </a>
+
       {/* Fixed Navigation Header */}
-      <Header onOpenResumeModal={() => setIsResumeModalOpen(true)} />
+      <Header onOpenResumeModal={openResumeModal} />
 
       {/* Main Sections */}
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         {/* 1. Hero / Apresentação Principal */}
         <Hero />
 
@@ -48,7 +65,8 @@ export default function App() {
       {/* Resume Modal */}
       <ResumeModal
         isOpen={isResumeModalOpen}
-        onClose={() => setIsResumeModalOpen(false)}
+        onClose={closeResumeModal}
+        returnFocusTo={resumeTrigger}
       />
     </div>
   );

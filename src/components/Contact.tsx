@@ -73,11 +73,15 @@ export const Contact: React.FC = () => {
                   </div>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800 rounded-lg transition-colors"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800 rounded-lg transition-colors"
+                    aria-label={copiedEmail ? 'E-mail copiado' : 'Copiar e-mail'}
                     title="Copiar e-mail"
                   >
                     {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                   </button>
+                  <span className="sr-only" aria-live="polite">
+                    {copiedEmail ? 'E-mail copiado para a área de transferência.' : ''}
+                  </span>
                 </div>
 
                 {/* Location Item */}

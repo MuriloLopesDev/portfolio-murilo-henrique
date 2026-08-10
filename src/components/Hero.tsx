@@ -1,13 +1,14 @@
 import React from 'react';
 import { personalInfo, professionalLinks } from '../data/portfolioData';
 import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Smartphone, Monitor, Globe } from 'lucide-react';
+import { getPreferredScrollBehavior } from '../utils/motion';
 
 export const Hero: React.FC = () => {
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: getPreferredScrollBehavior() });
     }
   };
 
@@ -101,7 +102,7 @@ export const Hero: React.FC = () => {
                 href={professionalLinks.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Perfil do LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -110,14 +111,14 @@ export const Hero: React.FC = () => {
                 href={professionalLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Perfil do GitHub"
               >
                 <Github className="w-5 h-5" />
               </a>
               <a
                 href={professionalLinks.email.url}
-                className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Enviar e-mail"
               >
                 <Mail className="w-5 h-5" />

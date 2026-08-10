@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText, ChevronRight } from 'lucide-react';
 import { navigationLinks, trackedSectionIds } from '../config/navigation';
 import { personalInfo } from '../data/portfolioData';
+import { getPreferredScrollBehavior } from '../utils/motion';
 
 interface HeaderProps {
-  onOpenResumeModal: () => void;
+  onOpenResumeModal: (trigger: HTMLButtonElement) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
@@ -40,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: getPreferredScrollBehavior() });
     }
     setMobileMenuOpen(false);
   };
@@ -95,8 +96,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
           <div className="flex items-center space-x-3">
             <button
               id="header-resume-btn"
-              onClick={onOpenResumeModal}
-              className="hidden sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              onClick={(event) => onOpenResumeModal(event.currentTarget)}
+              className="hidden min-h-11 sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
               <span>Ver Currículo</span>
@@ -106,9 +107,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="md:hidden inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
               aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -118,7 +120,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all">
+        <nav
+          id="mobile-navigation"
+          aria-label="Navegação mobile"
+          className="md:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all"
+        >
           <div className="px-4 pt-3 pb-6 space-y-2">
             {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
@@ -140,10 +146,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
             })}
             <div className="pt-3 border-t border-slate-800 mt-2">
               <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenResumeModal();
-                }}
+                onClick={(event) => onOpenResumeModal(event.currentTarget)}
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-lg shadow-md hover:brightness-110"
               >
                 <FileText className="w-4 h-4" />
@@ -151,7 +154,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
               </button>
             </div>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

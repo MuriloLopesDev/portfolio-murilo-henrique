@@ -5,7 +5,10 @@ import { ProjectDetailModal } from './ProjectDetailModal';
 import { FolderGit2, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const Projects: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selection, setSelection] = useState<{
+    project: Project;
+    trigger: HTMLButtonElement;
+  } | null>(null);
 
   return (
     <section id="projetos" className="py-20 relative bg-[#0d1322]">
@@ -96,7 +99,7 @@ export const Projects: React.FC = () => {
               <div className="px-6 pb-6 pt-2 border-t border-slate-800/80 bg-slate-900/40">
                 <button
                   id={`project-details-btn-${proj.id}`}
-                  onClick={() => setSelectedProject(proj)}
+                  onClick={(event) => setSelection({ project: proj, trigger: event.currentTarget })}
                   className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 >
                   <span>Ver detalhes do projeto</span>
@@ -112,8 +115,9 @@ export const Projects: React.FC = () => {
 
       {/* Detail Modal */}
       <ProjectDetailModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
+        project={selection?.project ?? null}
+        onClose={() => setSelection(null)}
+        returnFocusTo={selection?.trigger ?? null}
       />
     </section>
   );

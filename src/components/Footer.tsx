@@ -2,12 +2,13 @@ import React from 'react';
 import { personalInfo, professionalLinks } from '../data/portfolioData';
 import { Linkedin, Github, Mail, ArrowUp } from 'lucide-react';
 import { navigationLinks } from '../config/navigation';
+import { getPreferredScrollBehavior } from '../utils/motion';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: getPreferredScrollBehavior() });
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -15,7 +16,7 @@ export const Footer: React.FC = () => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: getPreferredScrollBehavior() });
     }
   };
 
@@ -36,7 +37,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Nav links */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium">
+          <nav aria-label="Navegação do rodapé" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium">
             {navigationLinks.map((link) => (
               <a
                 key={link.id}
@@ -55,7 +56,7 @@ export const Footer: React.FC = () => {
               href={professionalLinks.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
@@ -64,14 +65,14 @@ export const Footer: React.FC = () => {
               href={professionalLinks.github.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
               aria-label="GitHub"
             >
               <Github className="w-4 h-4" />
             </a>
             <a
               href={professionalLinks.email.url}
-              className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
               aria-label="E-mail"
             >
               <Mail className="w-4 h-4" />
@@ -79,7 +80,8 @@ export const Footer: React.FC = () => {
 
             <button
               onClick={scrollToTop}
-              className="p-2 text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-lg transition-all ml-2"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-lg transition-all ml-2"
+              aria-label="Voltar ao topo"
               title="Voltar ao topo"
             >
               <ArrowUp className="w-4 h-4" />

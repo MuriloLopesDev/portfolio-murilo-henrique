@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { coreTechnologies, personalInfo, professionalLinks, resumeDocument } from '../data/portfolioData';
 import { X, FileText, Download, Copy, Check, Briefcase, Award, MapPin, Mail } from 'lucide-react';
+import { useAccessibleModal } from '../hooks/useAccessibleModal';
 
 interface ResumeModalProps {
   isOpen: boolean;
   onClose: () => void;
+  returnFocusTo?: HTMLElement | null;
 }
 
-export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+export const ResumeModal: React.FC<ResumeModalProps> = ({
+  isOpen,
+  onClose,
+  returnFocusTo,
+}) => {
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  const dialogRef = useAccessibleModal({ isOpen, onClose, returnFocusTo });
 
   if (!isOpen) return null;
 
@@ -48,6 +41,8 @@ ${coreTechnologies.join(', ')}.
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto animate-fadeIn"
       onClick={onClose}
       aria-modal="true"
@@ -69,8 +64,9 @@ ${coreTechnologies.join(', ')}.
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-            aria-label="Fechar modal"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            aria-label="Fechar currículo"
+            data-modal-initial-focus
           >
             <X className="w-5 h-5" />
           </button>
@@ -135,16 +131,18 @@ ${coreTechnologies.join(', ')}.
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-6 py-4 bg-[#0d1322] border-t border-slate-800">
           <button
             onClick={handleCopySummary}
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+            className="w-full min-h-11 sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-cyan-400" />}
-            <span>{copied ? 'Copiado para a área de transferência!' : 'Copiar Resumo'}</span>
+            <span aria-live="polite">
+              {copied ? 'Copiado para a área de transferência!' : 'Copiar Resumo'}
+            </span>
           </button>
 
           <a
             href={resumeDocument.url}
             download={resumeDocument.filename}
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-lg shadow-md transition-all"
+            className="w-full min-h-11 sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-lg shadow-md transition-all"
           >
             <Download className="w-4 h-4" />
             <span>Baixar Currículo em PDF</span>
