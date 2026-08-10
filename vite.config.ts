@@ -10,10 +10,10 @@ const escapeHtmlAttribute = (value: string) =>
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;');
 
-const createSeoPlugin = (siteUrl: string, isPublicUrlConfigured: boolean): Plugin => {
+const createSeoPlugin = (siteUrl: string, shouldAllowIndexing: boolean): Plugin => {
   const pageUrl = `${siteUrl}/`;
   const imageUrl = new URL(seoConfig.socialImage.path, pageUrl).toString();
-  const robotsMeta = isPublicUrlConfigured
+  const robotsMeta = shouldAllowIndexing
     ? seoConfig.robots.production
     : seoConfig.robots.unconfigured;
   const structuredData = JSON.stringify(createStructuredData(siteUrl)).replaceAll('<', '\\u003c');
@@ -44,7 +44,7 @@ const createSeoPlugin = (siteUrl: string, isPublicUrlConfigured: boolean): Plugi
       },
     },
     generateBundle() {
-      const robots = isPublicUrlConfigured
+      const robots = shouldAllowIndexing
         ? `User-agent: *\nAllow: /\n\nSitemap: ${pageUrl}sitemap.xml\n`
         : 'User-agent: *\nDisallow: /\n';
       const sitemap = [
@@ -71,6 +71,13 @@ export default defineConfig(({ mode }) => {
   const configuredSiteUrl = environment[seoConfig.siteUrlEnvironmentVariable] || vercelSiteUrl;
   const isPublicUrlConfigured = Boolean(configuredSiteUrl);
   const siteUrl = normalizeSiteUrl(configuredSiteUrl || seoConfig.localSiteUrl);
+  const vercelEnvironment =
+    environment.VERCEL_ENV ||
+    environment.VERCEL_TARGET_ENV ||
+    environment.VITE_VERCEL_ENV ||
+    environment.VITE_VERCEL_TARGET_ENV;
+  const shouldAllowIndexing =
+    isPublicUrlConfigured && (!vercelEnvironment || vercelEnvironment === 'production');
 
   if (mode === 'production' && !isPublicUrlConfigured) {
     console.warn(
@@ -79,6 +86,6 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    plugins: [react(), tailwindcss(), createSeoPlugin(siteUrl, isPublicUrlConfigured)],
+    plugins: [react(), tailwindcss(), createSeoPlugin(siteUrl, shouldAllowIndexing)],
   };
 });
