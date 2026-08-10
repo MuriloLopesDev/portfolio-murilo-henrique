@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Project } from '../types';
-import { X, CheckCircle2, ShieldAlert, Cpu, Award, Globe, Github, Monitor, Layers, Image as ImageIcon, ArrowLeft } from 'lucide-react';
+import type { Project } from '../types';
+import { X, CheckCircle2, ShieldAlert, Cpu, Award, Globe, Layers, Image as ImageIcon, ArrowLeft } from 'lucide-react';
 
 interface ProjectDetailModalProps {
   project: Project | null;

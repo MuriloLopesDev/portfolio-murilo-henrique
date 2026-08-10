@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { projects } from '../data/portfolioData';
-import { Project } from '../types';
+import type { Project } from '../types';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { FolderGit2, ExternalLink, ArrowRight, Layers, CheckCircle2, ShieldCheck, Image as ImageIcon } from 'lucide-react';
+import { FolderGit2, ArrowRight, CheckCircle2, Image as ImageIcon } from 'lucide-react';
 
 export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);

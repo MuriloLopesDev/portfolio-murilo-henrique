@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { personalInfo, experiences } from '../data/portfolioData';
-import { X, FileText, Download, Copy, Check, Briefcase, GraduationCap, Award, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
+import { coreTechnologies, personalInfo, experiences } from '../data/portfolioData';
+import { X, FileText, Download, Copy, Check, Briefcase, Award, MapPin, Mail } from 'lucide-react';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -28,7 +28,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   const handleCopySummary = () => {
     const text = `
-Murilo Henrique — Desenvolvedor de Software (~4 anos de experiência)
+${personalInfo.name} — ${personalInfo.role} (${personalInfo.experienceYearsShort} de experiência)
 Localização: ${personalInfo.location} (${personalInfo.availability})
 E-mail: ${personalInfo.email}
 LinkedIn: ${personalInfo.linkedin}
@@ -38,7 +38,7 @@ Resumo Profissional:
 ${personalInfo.bio}
 
 Principais Tecnologias:
-Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQL, Supabase, APIs REST, Git.
+${coreTechnologies.join(', ')}.
     `.trim();
 
     navigator.clipboard.writeText(text);
@@ -51,10 +51,10 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
     const element = document.createElement("a");
     const file = new Blob([
       `==================================================\n` +
-      `CURRÍCULO PROFISSIONAL - MURILO HENRIQUE\n` +
+      `CURRÍCULO PROFISSIONAL - ${personalInfo.name.toUpperCase()}\n` +
       `==================================================\n\n` +
-      `Cargo: Desenvolvedor de Software\n` +
-      `Experiência: ~4 Anos\n` +
+      `Cargo: ${personalInfo.role}\n` +
+      `Experiência: ${personalInfo.experienceYearsShort.replace('anos', 'Anos')}\n` +
       `Localização: ${personalInfo.location}\n` +
       `Disponibilidade: ${personalInfo.availability}\n` +
       `E-mail: ${personalInfo.email}\n` +
@@ -65,7 +65,7 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
       `EXPERIÊNCIAS PROFISSIONAIS:\n` +
       experiences.map(e => `\n- ${e.company} (${e.period})\n  Cargo: ${e.role}\n  Responsabilidades:\n${e.responsibilities.map(r => `    * ${r}`).join('\n')}\n  Tecnologias: ${e.technologies.join(', ')}`).join('\n') +
       `\n\n==================================================\n` +
-      `Gerado via Portfólio Profissional de Murilo Henrique\n`
+      `Gerado via Portfólio Profissional de ${personalInfo.name}\n`
     ], { type: 'text/plain;charset=utf-8' });
     element.href = URL.createObjectURL(file);
     element.download = "Curriculo_Murilo_Henrique_Desenvolvedor.txt";
@@ -92,7 +92,7 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
           <div className="flex items-center space-x-2.5 text-cyan-400 font-bold">
             <FileText className="w-5 h-5" />
             <h2 id="resume-modal-title" className="text-lg font-bold text-white">
-              Currículo Profissional — Murilo Henrique
+              Currículo Profissional — {personalInfo.name}
             </h2>
           </div>
           <button
@@ -112,7 +112,7 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
               <div>
                 <h3 className="text-lg font-bold text-white">{personalInfo.name}</h3>
-                <p className="text-xs text-cyan-400 font-semibold">{personalInfo.role} (~4 anos exp)</p>
+                <p className="text-xs text-cyan-400 font-semibold">{personalInfo.role} ({personalInfo.experienceYearsShort} exp)</p>
               </div>
               <span className="text-xs px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-medium">
                 {personalInfo.availability}
@@ -149,7 +149,7 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
               <span>Principais Competências Técnicas</span>
             </h4>
             <div className="flex flex-wrap gap-1.5 pt-1">
-              {['Flutter', 'Dart', 'Ionic', 'Angular', 'React', 'TypeScript', 'JavaScript', 'Laravel', 'PHP', 'MySQL', 'Supabase', 'APIs REST', 'Git'].map((item, idx) => (
+              {coreTechnologies.map((item, idx) => (
                 <span key={idx} className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-900 text-cyan-300 border border-slate-800">
                   {item}
                 </span>

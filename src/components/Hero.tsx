@@ -1,6 +1,6 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Sparkles, Smartphone, Monitor, Globe } from 'lucide-react';
+import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Smartphone, Monitor, Globe } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -147,7 +147,7 @@ export const Hero: React.FC = () => {
                 {/* Quick Highlights Grid */}
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
-                    <span className="block text-xl font-extrabold text-cyan-400">~4 anos</span>
+                    <span className="block text-xl font-extrabold text-cyan-400">{personalInfo.experienceYearsShort}</span>
                     <span className="text-[12px] text-slate-400 font-medium">Experiência Real</span>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">

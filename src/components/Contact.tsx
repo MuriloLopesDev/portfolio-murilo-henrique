@@ -100,7 +100,7 @@ export const Contact: React.FC = () => {
                   <div>
                     <span className="text-xs text-slate-400 block font-medium">LinkedIn</span>
                     <span className="text-white group-hover:text-cyan-400 font-semibold transition-colors">
-                      in/murilo-henrique
+                      {personalInfo.linkedinLabel}
                     </span>
                   </div>
                 </a>
@@ -118,7 +118,7 @@ export const Contact: React.FC = () => {
                   <div>
                     <span className="text-xs text-slate-400 block font-medium">GitHub</span>
                     <span className="text-white group-hover:text-cyan-400 font-semibold transition-colors">
-                      github.com/murilopes007
+                      {personalInfo.githubLabel}
                     </span>
                   </div>
                 </a>
@@ -136,7 +136,7 @@ export const Contact: React.FC = () => {
                   Enviar Mensagem
                 </h3>
                 <p className="text-slate-400 text-xs sm:text-sm">
-                  Preencha os campos abaixo para iniciar uma conversa diretamente com Murilo Henrique.
+                  Preencha os campos abaixo para iniciar uma conversa diretamente com {personalInfo.name}.
                 </p>
               </div>
 

@@ -49,12 +49,16 @@ export interface PersonalInfo {
   name: string;
   role: string;
   experienceYears: string;
+  experienceYearsShort: string;
   location: string;
+  locationShort: string;
   availability: string;
   bio: string;
   heroSubtitle: string;
   heroDescription: string;
   linkedin: string;
+  linkedinLabel: string;
   github: string;
+  githubLabel: string;
   email: string;
 }

@@ -1,18 +1,38 @@
-import { PersonalInfo, Experience, Project, TechCategory, Differentiator } from '../types';
+import type { PersonalInfo, Experience, Project, TechCategory, Differentiator } from '../types';
 
 export const personalInfo: PersonalInfo = {
   name: 'Murilo Henrique',
   role: 'Desenvolvedor de Software',
   experienceYears: 'Aproximadamente 4 anos',
+  experienceYearsShort: '~4 anos',
   location: 'São José do Rio Preto, São Paulo',
+  locationShort: 'São José do Rio Preto, SP',
   availability: 'Disponível para oportunidades remotas ou presenciais',
   bio: 'Desenvolvedor de software com experiência na criação, manutenção e evolução de sistemas web, mobile e desktop. Atuo com foco na resolução prática de problemas, investigando causas raiz de falhas e aplicando regras de negócio para entregar soluções confiáveis, bem estruturadas e fáceis de utilizar.',
   heroSubtitle: 'Transformo necessidades reais em aplicações web, mobile e desktop eficientes, confiáveis e fáceis de usar.',
   heroDescription: 'Desenvolvedor com experiência na criação, manutenção e evolução de sistemas, atuando desde a análise do problema até a implementação, testes e entrega da solução.',
   linkedin: 'https://linkedin.com/in/murilo-henrique',
+  linkedinLabel: 'in/murilo-henrique',
   github: 'https://github.com/murilopes007',
+  githubLabel: 'github.com/murilopes007',
   email: 'murilopes007@gmail.com',
 };
+
+export const coreTechnologies = [
+  'Flutter',
+  'Dart',
+  'Ionic',
+  'Angular',
+  'React',
+  'TypeScript',
+  'JavaScript',
+  'Laravel',
+  'PHP',
+  'MySQL',
+  'Supabase',
+  'APIs REST',
+  'Git',
+] as const;
 
 export const experiences: Experience[] = [
   {

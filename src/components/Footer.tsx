@@ -1,6 +1,7 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolioData';
 import { Linkedin, Github, Mail, ArrowUp } from 'lucide-react';
+import { navigationLinks } from '../config/navigation';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -8,15 +9,6 @@ export const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const navLinks = [
-    { name: 'Início', href: '#inicio' },
-    { name: 'Sobre', href: '#sobre' },
-    { name: 'Experiência', href: '#experiencia' },
-    { name: 'Projetos', href: '#projetos' },
-    { name: 'Tecnologias', href: '#tecnologias' },
-    { name: 'Contato', href: '#contato' },
-  ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -39,15 +31,15 @@ export const Footer: React.FC = () => {
               {personalInfo.name}
             </h3>
             <p className="text-xs text-slate-400 font-medium">
-              {personalInfo.role} — São José do Rio Preto, SP
+              {personalInfo.role} — {personalInfo.locationShort}
             </p>
           </div>
 
           {/* Nav links */}
           <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium">
-            {navLinks.map((link, idx) => (
+            {navigationLinks.map((link) => (
               <a
-                key={idx}
+                key={link.id}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className="hover:text-cyan-400 transition-colors"
@@ -98,7 +90,7 @@ export const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
-          <p>© {currentYear} Murilo Henrique. Todos os direitos reservados.</p>
+          <p>© {currentYear} {personalInfo.name}. Todos os direitos reservados.</p>
           <p>Portfólio Profissional — Desenvolvido em React & TypeScript.</p>
         </div>
 

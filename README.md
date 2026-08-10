@@ -1,20 +1,40 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Portfólio — Murilo Henrique
 
-# Run and deploy your AI Studio app
+Portfólio profissional desenvolvido como uma aplicação React de página única.
 
-This contains everything you need to run your app locally.
+## Tecnologias
 
-View your app in AI Studio: https://ai.studio/apps/8292bdb2-d697-4c09-98db-7f8fbb39359b
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide React
 
-## Run Locally
+## Requisitos
 
-**Prerequisites:**  Node.js
+- Node.js
+- npm
 
+## Desenvolvimento local
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+```
+
+O servidor de desenvolvimento é iniciado em `http://localhost:3000`.
+
+## Scripts
+
+- `npm run dev`: inicia o servidor de desenvolvimento.
+- `npm run build`: gera o build de produção em `dist`.
+- `npm run preview`: executa uma prévia local do build.
+- `npm run lint`: valida os tipos TypeScript sem gerar arquivos.
+- `npm run clean`: remove os artefatos locais de build.
+
+## Estrutura principal
+
+- `src/components`: seções e componentes da interface.
+- `src/config`: configurações compartilhadas da aplicação.
+- `src/data`: conteúdo profissional exibido no portfólio.
+- `src/types`: tipos TypeScript compartilhados.

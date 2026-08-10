@@ -1,6 +1,5 @@
 import React from 'react';
-import { personalInfo } from '../data/portfolioData';
-import { User, Code2, Wrench, Database, Cpu, CheckCircle, ShieldCheck, Sparkles } from 'lucide-react';
+import { User, Code2, Wrench, Database, Cpu, CheckCircle, ShieldCheck } from 'lucide-react';
 
 export const About: React.FC = () => {
   const highlights = [

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText, ChevronRight } from 'lucide-react';
+import { navigationLinks, trackedSectionIds } from '../config/navigation';
+import { personalInfo } from '../data/portfolioData';
 
 interface HeaderProps {
   onOpenResumeModal: () => void;
@@ -14,10 +16,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['inicio', 'sobre', 'experiencia', 'projetos', 'tecnologias', 'diferenciais', 'contato'];
       const scrollPosition = window.scrollY + 120;
 
-      for (const section of sections) {
+      for (const section of trackedSectionIds) {
         const element = document.getElementById(section);
         if (element) {
           const top = element.offsetTop;
@@ -33,15 +34,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Início', href: '#inicio', id: 'inicio' },
-    { name: 'Sobre', href: '#sobre', id: 'sobre' },
-    { name: 'Experiência', href: '#experiencia', id: 'experiencia' },
-    { name: 'Projetos', href: '#projetos', id: 'projetos' },
-    { name: 'Tecnologias', href: '#tecnologias', id: 'tecnologias' },
-    { name: 'Contato', href: '#contato', id: 'contato' },
-  ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -74,13 +66,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
               MH
             </div>
             <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              Murilo Henrique
+              {personalInfo.name}
             </span>
           </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Navegação principal">
-            {navLinks.map((link) => {
+            {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
@@ -128,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all">
           <div className="px-4 pt-3 pb-6 space-y-2">
-            {navLinks.map((link) => {
+            {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
