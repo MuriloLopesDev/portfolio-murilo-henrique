@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import type { Project } from '../types';
-import { X, CheckCircle2, ShieldAlert, Cpu, Award, Globe, Layers, Image as ImageIcon, ArrowLeft } from 'lucide-react';
+import { X, CheckCircle2, Cpu, Award, Globe, Layers, Image as ImageIcon, ArrowLeft, Lightbulb } from 'lucide-react';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -88,43 +88,44 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             </div>
 
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-              <span className="text-xs text-slate-400 font-medium">Responsabilidade</span>
-              <p className="text-sm font-semibold text-indigo-300">Desenvolvedor Principal</p>
+              <span className="text-xs text-slate-400 font-medium">Galeria</span>
+              <p className="text-sm font-semibold text-indigo-300">{project.gallery.length} telas do projeto</p>
             </div>
           </div>
 
-          {/* Context & Short Description */}
+          {/* Context and Problem */}
           <div className="space-y-3">
             <h3 className="text-base font-bold text-white flex items-center space-x-2">
               <Globe className="w-4 h-4 text-cyan-400" />
-              <span>Contexto do Projeto</span>
+              <span>Contexto / Problema</span>
             </h3>
-            <p className="text-slate-300 leading-relaxed text-base">{project.context}</p>
+            <p className="text-slate-300 leading-relaxed text-base">{project.caseStudy.context}</p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              {project.caseStudy.problems.map((problem) => (
+                <li key={problem} className="flex items-start space-x-2 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-300 text-xs sm:text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span>{problem}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* My Role / Participation */}
+          {/* Solution */}
+          <div className="p-5 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-2">
+            <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
+              <Lightbulb className="w-4 h-4" />
+              <span>Solução Desenvolvida</span>
+            </h3>
+            <p className="text-slate-200 text-sm leading-relaxed">{project.caseStudy.solution}</p>
+          </div>
+
+          {/* My Participation */}
           <div className="p-5 rounded-xl bg-cyan-950/20 border border-cyan-500/20 space-y-2">
             <h3 className="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center space-x-2">
               <Award className="w-4 h-4" />
               <span>Minha Participação</span>
             </h3>
-            <p className="text-slate-200 text-sm leading-relaxed">{project.participation}</p>
-          </div>
-
-          {/* Problem Solved */}
-          <div className="space-y-3">
-            <h3 className="text-base font-bold text-white flex items-center space-x-2">
-              <ShieldAlert className="w-4 h-4 text-amber-400" />
-              <span>Problema Resolvido</span>
-            </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {project.problemSolved.map((prob, idx) => (
-                <li key={idx} className="flex items-start space-x-2 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-300 text-xs sm:text-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
-                  <span>{prob}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="text-slate-200 text-sm leading-relaxed">{project.caseStudy.participation}</p>
           </div>
 
           {/* Key Features */}
@@ -134,10 +135,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               <span>Funcionalidades Principais</span>
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {project.mainFeatures.map((feat, idx) => (
-                <div key={idx} className="flex items-start space-x-2 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-300 text-xs sm:text-sm">
+              {project.caseStudy.features.map((feature) => (
+                <div key={feature} className="flex items-start space-x-2 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-300 text-xs sm:text-sm">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span>{feat}</span>
+                  <span>{feature}</span>
                 </div>
               ))}
             </div>
@@ -150,22 +151,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               <span>Desafios Técnicos Enfrentados</span>
             </h3>
             <ul className="space-y-2">
-              {project.technicalChallenges.map((ch, idx) => (
-                <li key={idx} className="flex items-start space-x-2.5 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-300 text-xs sm:text-sm">
+              {project.caseStudy.technicalChallenges.map((challenge) => (
+                <li key={challenge} className="flex items-start space-x-2.5 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-300 text-xs sm:text-sm">
                   <span className="w-2 h-2 rounded-full bg-indigo-400 mt-1.5 flex-shrink-0" />
-                  <span className="leading-relaxed">{ch}</span>
+                  <span className="leading-relaxed">{challenge}</span>
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Result */}
-          <div className="p-5 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-2">
-            <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Resultado da Solução</span>
-            </h3>
-            <p className="text-slate-200 text-sm leading-relaxed">{project.result}</p>
           </div>
 
           {/* Technologies Stack */}
@@ -175,9 +167,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               <span>Tecnologias Utilizadas</span>
             </h3>
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, idx) => (
+              {project.technologies.map((tech) => (
                 <span
-                  key={idx}
+                  key={tech}
                   className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-cyan-300 border border-slate-800"
                 >
                   {tech}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { coreTechnologies, personalInfo, experiences } from '../data/portfolioData';
+import { coreTechnologies, personalInfo, professionalLinks, resumeDocument } from '../data/portfolioData';
 import { X, FileText, Download, Copy, Check, Briefcase, Award, MapPin, Mail } from 'lucide-react';
 
 interface ResumeModalProps {
@@ -30,9 +30,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     const text = `
 ${personalInfo.name} — ${personalInfo.experienceStatement}
 Localização: ${personalInfo.location} (${personalInfo.availability})
-E-mail: ${personalInfo.email}
-LinkedIn: ${personalInfo.linkedin}
-GitHub: ${personalInfo.github}
+E-mail: ${professionalLinks.email.address}
+LinkedIn: ${professionalLinks.linkedin.url}
+GitHub: ${professionalLinks.github.url}
 
 Resumo Profissional:
 ${personalInfo.bio}
@@ -44,34 +44,6 @@ ${coreTechnologies.join(', ')}.
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
-  };
-
-  const handleDownloadMockPdf = () => {
-    // Generate clean text resume file download
-    const element = document.createElement("a");
-    const file = new Blob([
-      `==================================================\n` +
-      `CURRÍCULO PROFISSIONAL - ${personalInfo.name.toUpperCase()}\n` +
-      `==================================================\n\n` +
-      `Cargo: ${personalInfo.role}\n` +
-      `Experiência: ${personalInfo.experienceLabel}\n` +
-      `Localização: ${personalInfo.location}\n` +
-      `Disponibilidade: ${personalInfo.availability}\n` +
-      `E-mail: ${personalInfo.email}\n` +
-      `LinkedIn: ${personalInfo.linkedin}\n` +
-      `GitHub: ${personalInfo.github}\n\n` +
-      `RESUMO PROFISSIONAL:\n` +
-      `${personalInfo.bio}\n\n` +
-      `EXPERIÊNCIAS PROFISSIONAIS:\n` +
-      experiences.map(e => `\n- ${e.company} (${e.period})\n  Cargo: ${e.role}\n  Responsabilidades:\n${e.responsibilities.map(r => `    * ${r}`).join('\n')}\n  Tecnologias: ${e.technologies.join(', ')}`).join('\n') +
-      `\n\n==================================================\n` +
-      `Gerado via Portfólio Profissional de ${personalInfo.name}\n`
-    ], { type: 'text/plain;charset=utf-8' });
-    element.href = URL.createObjectURL(file);
-    element.download = "Curriculo_Murilo_Henrique_Desenvolvedor.txt";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
   };
 
   return (
@@ -126,7 +98,7 @@ ${coreTechnologies.join(', ')}.
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{personalInfo.email}</span>
+                <span>{professionalLinks.email.address}</span>
               </div>
             </div>
           </div>
@@ -149,8 +121,8 @@ ${coreTechnologies.join(', ')}.
               <span>Principais Competências Técnicas</span>
             </h4>
             <div className="flex flex-wrap gap-1.5 pt-1">
-              {coreTechnologies.map((item, idx) => (
-                <span key={idx} className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-900 text-cyan-300 border border-slate-800">
+              {coreTechnologies.map((item) => (
+                <span key={item} className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-900 text-cyan-300 border border-slate-800">
                   {item}
                 </span>
               ))}
@@ -169,13 +141,14 @@ ${coreTechnologies.join(', ')}.
             <span>{copied ? 'Copiado para a área de transferência!' : 'Copiar Resumo'}</span>
           </button>
 
-          <button
-            onClick={handleDownloadMockPdf}
+          <a
+            href={resumeDocument.url}
+            download={resumeDocument.filename}
             className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-lg shadow-md transition-all"
           >
             <Download className="w-4 h-4" />
-            <span>Baixar Currículo (.txt / PDF)</span>
-          </button>
+            <span>Baixar Currículo em PDF</span>
+          </a>
         </div>
 
       </div>

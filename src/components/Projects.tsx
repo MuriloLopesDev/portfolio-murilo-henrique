@@ -67,8 +67,8 @@ export const Projects: React.FC = () => {
                       Principais Destaques
                     </h4>
                     <ul className="space-y-1.5 text-xs text-slate-300">
-                      {proj.mainFeatures.slice(0, 3).map((feat, idx) => (
-                        <li key={idx} className="flex items-start space-x-2">
+                      {proj.caseStudy.features.slice(0, 3).map((feat) => (
+                        <li key={feat} className="flex items-start space-x-2">
                           <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
@@ -79,9 +79,9 @@ export const Projects: React.FC = () => {
                   {/* Tech stack chips */}
                   <div className="pt-2">
                     <div className="flex flex-wrap gap-1.5">
-                      {proj.technologies.map((tech, idx) => (
+                      {proj.technologies.map((tech) => (
                         <span
-                          key={idx}
+                          key={tech}
                           className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-900 text-slate-300 border border-slate-800"
                         >
                           {tech}

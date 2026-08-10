@@ -1,5 +1,5 @@
 import React from 'react';
-import { personalInfo } from '../data/portfolioData';
+import { personalInfo, professionalLinks } from '../data/portfolioData';
 import { Linkedin, Github, Mail, ArrowUp } from 'lucide-react';
 import { navigationLinks } from '../config/navigation';
 
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
           {/* Socials & Top Scroll */}
           <div className="flex items-center space-x-3">
             <a
-              href={personalInfo.linkedin}
+              href={professionalLinks.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               <Linkedin className="w-4 h-4" />
             </a>
             <a
-              href={personalInfo.github}
+              href={professionalLinks.github.url}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
               <Github className="w-4 h-4" />
             </a>
             <a
-              href={`mailto:${personalInfo.email}`}
+              href={professionalLinks.email.url}
               className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/80 rounded-lg transition-colors"
               aria-label="E-mail"
             >

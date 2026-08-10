@@ -11,18 +11,22 @@ export interface ProjectGalleryItem {
   image: ProjectImage;
 }
 
+export interface ProjectCaseStudy {
+  context: string;
+  problems: string[];
+  solution: string;
+  participation: string;
+  features: string[];
+  technicalChallenges: string[];
+}
+
 export interface Project {
   id: string;
   name: string;
   category: string;
   shortDescription: string;
-  context: string;
-  problemSolved: string[];
-  participation: string;
-  mainFeatures: string[];
+  caseStudy: ProjectCaseStudy;
   technologies: string[];
-  technicalChallenges: string[];
-  result: string;
   status: string;
   coverImage: ProjectImage;
   gallery: ProjectGalleryItem[];
@@ -66,9 +70,4 @@ export interface PersonalInfo {
   bio: string;
   heroSubtitle: string;
   heroDescription: string;
-  linkedin: string;
-  linkedinLabel: string;
-  github: string;
-  githubLabel: string;
-  email: string;
 }

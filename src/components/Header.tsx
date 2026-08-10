@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
               className="hidden sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
-              <span>Baixar Currículo</span>
+              <span>Ver Currículo</span>
             </button>
 
             {/* Mobile menu trigger */}
@@ -147,7 +147,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-lg shadow-md hover:brightness-110"
               >
                 <FileText className="w-4 h-4" />
-                <span>Baixar Currículo</span>
+                <span>Ver Currículo</span>
               </button>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { personalInfo } from '../data/portfolioData';
+import { personalInfo, professionalLinks } from '../data/portfolioData';
 import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Smartphone, Monitor, Globe } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -98,7 +98,7 @@ export const Hero: React.FC = () => {
             {/* Social Links */}
             <div className="pt-2 flex items-center justify-center lg:justify-start space-x-4">
               <a
-                href={personalInfo.linkedin}
+                href={professionalLinks.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
@@ -107,7 +107,7 @@ export const Hero: React.FC = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href={personalInfo.github}
+                href={professionalLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
@@ -116,7 +116,7 @@ export const Hero: React.FC = () => {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href={`mailto:${personalInfo.email}`}
+                href={professionalLinks.email.url}
                 className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Enviar e-mail"
               >
