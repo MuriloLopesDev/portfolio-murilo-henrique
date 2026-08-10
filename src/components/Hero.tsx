@@ -148,7 +148,7 @@ export const Hero: React.FC = () => {
                     className="h-full w-full object-cover object-center"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent px-5 pb-5 pt-12">
-                    <h3 className="text-white font-bold text-lg">{personalInfo.name}</h3>
+                    <p className="text-white font-bold text-lg">{personalInfo.name}</p>
                     <p className="text-slate-300 text-xs mt-0.5">{personalInfo.role}</p>
                   </div>
                 </div>

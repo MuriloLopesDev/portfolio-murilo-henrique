@@ -1,10 +1,8 @@
-# Ícones pendentes
+# Ícones do portfólio
 
-Adicione aqui os arquivos oficiais quando houver um ícone de marca aprovado:
+Arquivos disponíveis:
 
-- `favicon.svg` ou `favicon.ico`
-- `apple-touch-icon.png` em 180x180 px
-- `icon-192.png` em 192x192 px
-- `icon-512.png` em 512x512 px
+- `favicon.svg`: ícone vetorial principal com a marca ML.
+- `/favicon.ico`: fallback convencional servido na raiz pública.
 
-Os elementos `<link>` correspondentes devem ser ativados em `index.html` somente depois que esses arquivos existirem.
+Ícones adicionais para instalação como aplicativo podem ser incluídos futuramente se houver necessidade.

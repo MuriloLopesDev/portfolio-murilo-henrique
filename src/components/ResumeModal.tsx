@@ -15,11 +15,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
   returnFocusTo,
 }) => {
   const [copied, setCopied] = useState(false);
+  const [copyFeedback, setCopyFeedback] = useState('');
   const dialogRef = useAccessibleModal({ isOpen, onClose, returnFocusTo });
 
   if (!isOpen) return null;
 
-  const handleCopySummary = () => {
+  const handleCopySummary = async () => {
     const text = `
 ${personalInfo.name} — ${personalInfo.experienceStatement}
 Localização: ${personalInfo.location} (${personalInfo.availability})
@@ -34,9 +35,26 @@ Principais Tecnologias:
 ${coreTechnologies.join(', ')}.
     `.trim();
 
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setCopied(false);
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API indisponível');
+      }
+
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setCopyFeedback('Resumo copiado para a área de transferência.');
+    } catch {
+      setCopyFeedback(
+        'Não foi possível copiar o resumo. Selecione o conteúdo e copie manualmente.',
+      );
+    }
+
+    setTimeout(() => {
+      setCopied(false);
+      setCopyFeedback('');
+    }, 2500);
   };
 
   return (
@@ -134,10 +152,13 @@ ${coreTechnologies.join(', ')}.
             className="w-full min-h-11 sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-cyan-400" />}
-            <span aria-live="polite">
+            <span>
               {copied ? 'Copiado para a área de transferência!' : 'Copiar Resumo'}
             </span>
           </button>
+          <span className="sr-only" aria-live="polite">
+            {copyFeedback}
+          </span>
 
           <a
             href={resumeDocument.url}

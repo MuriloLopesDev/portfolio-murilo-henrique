@@ -66,18 +66,18 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
           <a
             href="#inicio"
             onClick={(e) => handleNavClick(e, '#inicio')}
-            className="group flex items-center space-x-2 text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-md px-1 py-0.5"
+            className="group flex shrink-0 items-center space-x-2 text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-md px-1 py-0.5"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-extrabold text-sm shadow-md group-hover:scale-105 transition-transform">
               {professionalInitials}
             </div>
-            <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+            <span className="whitespace-nowrap bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
               {personalInfo.name}
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Navegação principal">
+          <nav className="hidden lg:flex items-center space-x-1 lg:space-x-2" aria-label="Navegação principal">
             {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
             <button
               id="header-resume-btn"
               onClick={(event) => onOpenResumeModal(event.currentTarget)}
-              className="hidden min-h-11 sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="hidden min-h-11 shrink-0 whitespace-nowrap sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
               <span>Ver Currículo</span>
@@ -112,7 +112,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="lg:hidden inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
               aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
@@ -128,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
         <nav
           id="mobile-navigation"
           aria-label="Navegação mobile"
-          className="md:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all"
+          className="lg:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all"
         >
           <div className="px-4 pt-3 pb-6 space-y-2">
             {navigationLinks.map((link) => {

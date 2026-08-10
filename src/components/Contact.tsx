@@ -10,6 +10,7 @@ export const Contact: React.FC = () => {
     message: '',
   });
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copyEmailFeedback, setCopyEmailFeedback] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,10 +23,27 @@ export const Contact: React.FC = () => {
     window.location.href = `${professionalLinks.email.url}?subject=${subject}&body=${body}`;
   };
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(professionalLinks.email.address);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
+  const handleCopyEmail = async () => {
+    setCopiedEmail(false);
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API indisponível');
+      }
+
+      await navigator.clipboard.writeText(professionalLinks.email.address);
+      setCopiedEmail(true);
+      setCopyEmailFeedback('E-mail copiado para a área de transferência.');
+    } catch {
+      setCopyEmailFeedback(
+        'Não foi possível copiar o e-mail. Selecione o endereço e copie manualmente.',
+      );
+    }
+
+    setTimeout(() => {
+      setCopiedEmail(false);
+      setCopyEmailFeedback('');
+    }, 2500);
   };
 
   return (
@@ -80,7 +98,7 @@ export const Contact: React.FC = () => {
                     {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                   </button>
                   <span className="sr-only" aria-live="polite">
-                    {copiedEmail ? 'E-mail copiado para a área de transferência.' : ''}
+                    {copyEmailFeedback}
                   </span>
                 </div>
 
@@ -103,12 +121,12 @@ export const Contact: React.FC = () => {
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-colors group"
                 >
-                  <div className="p-2.5 rounded-lg bg-sky-950 border border-sky-500/30 text-sky-400">
+                  <div className="flex-shrink-0 p-2.5 rounded-lg bg-sky-950 border border-sky-500/30 text-sky-400">
                     <Linkedin className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs text-slate-400 block font-medium">LinkedIn</span>
-                    <span className="text-white group-hover:text-cyan-400 font-semibold transition-colors">
+                    <span className="block break-all sm:break-normal text-white group-hover:text-cyan-400 font-semibold transition-colors">
                       {professionalLinks.linkedin.label}
                     </span>
                   </div>
@@ -121,12 +139,12 @@ export const Contact: React.FC = () => {
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-colors group"
                 >
-                  <div className="p-2.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
+                  <div className="flex-shrink-0 p-2.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
                     <Github className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs text-slate-400 block font-medium">GitHub</span>
-                    <span className="text-white group-hover:text-cyan-400 font-semibold transition-colors">
+                    <span className="block break-all sm:break-normal text-white group-hover:text-cyan-400 font-semibold transition-colors">
                       {professionalLinks.github.label}
                     </span>
                   </div>
