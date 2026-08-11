@@ -1,6 +1,6 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { User, Code2, Wrench, Database, Cpu, CheckCircle, ShieldCheck, Sparkles } from 'lucide-react';
+import { User, Code2, Wrench, Database, Cpu, CheckCircle, ShieldCheck } from 'lucide-react';
 
 export const About: React.FC = () => {
   const highlights = [
@@ -51,7 +51,7 @@ export const About: React.FC = () => {
           <div className="lg:col-span-7 space-y-6 text-slate-300 text-base leading-relaxed">
             <div className="glass-card rounded-2xl p-6 sm:p-8 space-y-5 border border-slate-800">
               <p>
-                Atuo profissionalmente há <strong className="text-white">aproximadamente quatro anos</strong> no desenvolvimento, suporte e manutenção de sistemas de software. Durante esse período, adquiri experiência prática na construção de aplicações <strong className="text-cyan-400">mobile, web e desktop</strong>, lidando diretamente com desafios reais de negócios e fluxos de trabalho do dia a dia.
+                Atuo profissionalmente <strong className="text-white">desde {personalInfo.careerStartYear}</strong> no desenvolvimento, suporte e manutenção de sistemas de software. Durante esse período, adquiri experiência prática na construção de aplicações <strong className="text-cyan-400">mobile, web e desktop</strong>, lidando diretamente com desafios reais de negócios e fluxos de trabalho do dia a dia.
               </p>
               <p>
                 Minha atuação engloba tanto o <strong className="text-white">frontend</strong> quanto o <strong className="text-white">backend</strong>, cobrindo desde a estruturação visual e navegação do usuário até a integração com APIs RESTful, tratamento de regras de negócio e persistência em bancos de dados relacionais e serviços como Supabase.

@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText, ChevronRight } from 'lucide-react';
+import { navigationLinks, trackedSectionIds } from '../config/navigation';
+import { personalInfo } from '../data/portfolioData';
+import { getPreferredScrollBehavior } from '../utils/motion';
 
 interface HeaderProps {
-  onOpenResumeModal: () => void;
+  onOpenResumeModal: (trigger: HTMLButtonElement) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
+  const professionalInitials = personalInfo.name
+    .split(/\s+/)
+    .map((namePart) => namePart[0])
+    .join('')
+    .slice(0, 2);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['inicio', 'sobre', 'experiencia', 'projetos', 'tecnologias', 'diferenciais', 'contato'];
       const scrollPosition = window.scrollY + 120;
 
-      for (const section of sections) {
+      for (const section of trackedSectionIds) {
         const element = document.getElementById(section);
         if (element) {
           const top = element.offsetTop;
@@ -34,21 +41,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Início', href: '#inicio', id: 'inicio' },
-    { name: 'Sobre', href: '#sobre', id: 'sobre' },
-    { name: 'Experiência', href: '#experiencia', id: 'experiencia' },
-    { name: 'Projetos', href: '#projetos', id: 'projetos' },
-    { name: 'Tecnologias', href: '#tecnologias', id: 'tecnologias' },
-    { name: 'Contato', href: '#contato', id: 'contato' },
-  ];
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: getPreferredScrollBehavior() });
     }
     setMobileMenuOpen(false);
   };
@@ -68,19 +66,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
           <a
             href="#inicio"
             onClick={(e) => handleNavClick(e, '#inicio')}
-            className="group flex items-center space-x-2 text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-md px-1 py-0.5"
+            className="group flex shrink-0 items-center space-x-2 text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-md px-1 py-0.5"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-extrabold text-sm shadow-md group-hover:scale-105 transition-transform">
-              MH
+              {professionalInitials}
             </div>
-            <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              Murilo Henrique
+            <span className="whitespace-nowrap bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+              {personalInfo.name}
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Navegação principal">
-            {navLinks.map((link) => {
+          <nav className="hidden lg:flex items-center space-x-1 lg:space-x-2" aria-label="Navegação principal">
+            {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
@@ -103,20 +101,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
           <div className="flex items-center space-x-3">
             <button
               id="header-resume-btn"
-              onClick={onOpenResumeModal}
-              className="hidden sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              onClick={(event) => onOpenResumeModal(event.currentTarget)}
+              className="hidden min-h-11 shrink-0 whitespace-nowrap sm:inline-flex items-center space-x-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-100 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
-              <span>Baixar Currículo</span>
+              <span>Ver Currículo</span>
             </button>
 
             {/* Mobile menu trigger */}
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="lg:hidden inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
               aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -126,9 +125,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all">
+        <nav
+          id="mobile-navigation"
+          aria-label="Navegação mobile"
+          className="lg:hidden fixed inset-x-0 top-[60px] bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl transition-all"
+        >
           <div className="px-4 pt-3 pb-6 space-y-2">
-            {navLinks.map((link) => {
+            {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
@@ -148,18 +151,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResumeModal }) => {
             })}
             <div className="pt-3 border-t border-slate-800 mt-2">
               <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenResumeModal();
-                }}
+                onClick={(event) => onOpenResumeModal(event.currentTarget)}
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-lg shadow-md hover:brightness-110"
               >
                 <FileText className="w-4 h-4" />
-                <span>Baixar Currículo</span>
+                <span>Ver Currículo</span>
               </button>
             </div>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

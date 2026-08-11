@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { projects } from '../data/portfolioData';
-import { Project } from '../types';
+import type { Project } from '../types';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { FolderGit2, ExternalLink, ArrowRight, Layers, CheckCircle2, ShieldCheck, Image as ImageIcon } from 'lucide-react';
+import { FolderGit2, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const Projects: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selection, setSelection] = useState<{
+    project: Project;
+    trigger: HTMLButtonElement;
+  } | null>(null);
 
   return (
     <section id="projetos" className="py-20 relative bg-[#0d1322]">
@@ -33,16 +36,17 @@ export const Projects: React.FC = () => {
               className="glass-card glass-card-hover rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group"
             >
               <div>
-                {/* Project Cover Placeholder */}
-                <div className="relative aspect-video w-full bg-slate-900 border-b border-slate-800/80 flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-800 border border-slate-700/80 flex items-center justify-center text-cyan-400 mb-3 shadow-inner group-hover:scale-105 transition-transform">
-                    <ImageIcon className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-sm font-bold text-white px-4">{proj.name}</h3>
-                  <span className="text-[11px] text-slate-400 mt-1 font-medium">{proj.category}</span>
-                  <span className="mt-2 text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800/90 text-slate-400 border border-slate-700/60">
-                    Imagem do projeto será adicionada
-                  </span>
+                {/* Project Cover */}
+                <div className="relative aspect-video w-full bg-slate-900 border-b border-slate-800/80 overflow-hidden">
+                  <img
+                    src={proj.coverImage.src}
+                    alt={proj.coverImage.alt}
+                    width={proj.coverImage.width}
+                    height={proj.coverImage.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
 
                   <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-950/90 text-cyan-400 border border-cyan-500/30">
                     {proj.category}
@@ -66,8 +70,8 @@ export const Projects: React.FC = () => {
                       Principais Destaques
                     </h4>
                     <ul className="space-y-1.5 text-xs text-slate-300">
-                      {proj.mainFeatures.slice(0, 3).map((feat, idx) => (
-                        <li key={idx} className="flex items-start space-x-2">
+                      {proj.caseStudy.features.slice(0, 3).map((feat) => (
+                        <li key={feat} className="flex items-start space-x-2">
                           <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
@@ -78,9 +82,9 @@ export const Projects: React.FC = () => {
                   {/* Tech stack chips */}
                   <div className="pt-2">
                     <div className="flex flex-wrap gap-1.5">
-                      {proj.technologies.map((tech, idx) => (
+                      {proj.technologies.map((tech) => (
                         <span
-                          key={idx}
+                          key={tech}
                           className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-900 text-slate-300 border border-slate-800"
                         >
                           {tech}
@@ -95,7 +99,7 @@ export const Projects: React.FC = () => {
               <div className="px-6 pb-6 pt-2 border-t border-slate-800/80 bg-slate-900/40">
                 <button
                   id={`project-details-btn-${proj.id}`}
-                  onClick={() => setSelectedProject(proj)}
+                  onClick={(event) => setSelection({ project: proj, trigger: event.currentTarget })}
                   className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 >
                   <span>Ver detalhes do projeto</span>
@@ -111,8 +115,9 @@ export const Projects: React.FC = () => {
 
       {/* Detail Modal */}
       <ProjectDetailModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
+        project={selection?.project ?? null}
+        onClose={() => setSelection(null)}
+        returnFocusTo={selection?.trigger ?? null}
       />
     </section>
   );

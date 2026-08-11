@@ -1,6 +1,23 @@
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export interface ProjectGalleryItem {
   screenTitle: string;
   description: string;
+  image: ProjectImage;
+}
+
+export interface ProjectCaseStudy {
+  context: string;
+  problems: string[];
+  solution: string;
+  participation: string;
+  features: string[];
+  technicalChallenges: string[];
 }
 
 export interface Project {
@@ -8,14 +25,10 @@ export interface Project {
   name: string;
   category: string;
   shortDescription: string;
-  context: string;
-  problemSolved: string[];
-  participation: string;
-  mainFeatures: string[];
+  caseStudy: ProjectCaseStudy;
   technologies: string[];
-  technicalChallenges: string[];
-  result: string;
   status: string;
+  coverImage: ProjectImage;
   gallery: ProjectGalleryItem[];
   demoLink?: string;
   repoLink?: string;
@@ -48,13 +61,13 @@ export interface Differentiator {
 export interface PersonalInfo {
   name: string;
   role: string;
-  experienceYears: string;
+  careerStartYear: string;
+  experienceLabel: string;
+  experienceStatement: string;
   location: string;
+  locationShort: string;
   availability: string;
   bio: string;
   heroSubtitle: string;
   heroDescription: string;
-  linkedin: string;
-  github: string;
-  email: string;
 }

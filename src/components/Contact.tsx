@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { personalInfo } from '../data/portfolioData';
-import { Mail, Linkedin, Github, MapPin, Send, CheckCircle2, Copy, Check, Info } from 'lucide-react';
+import { personalInfo, professionalLinks } from '../data/portfolioData';
+import { Mail, Linkedin, Github, MapPin, Send, Copy, Check, Info } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -9,18 +9,41 @@ export const Contact: React.FC = () => {
     subject: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copyEmailFeedback, setCopyEmailFeedback] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(
+      `Nome: ${formData.name}\nE-mail para retorno: ${formData.email}\n\n${formData.message}`,
+    );
+
+    window.location.href = `${professionalLinks.email.url}?subject=${subject}&body=${body}`;
   };
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
+  const handleCopyEmail = async () => {
+    setCopiedEmail(false);
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API indisponível');
+      }
+
+      await navigator.clipboard.writeText(professionalLinks.email.address);
+      setCopiedEmail(true);
+      setCopyEmailFeedback('E-mail copiado para a área de transferência.');
+    } catch {
+      setCopyEmailFeedback(
+        'Não foi possível copiar o e-mail. Selecione o endereço e copie manualmente.',
+      );
+    }
+
+    setTimeout(() => {
+      setCopiedEmail(false);
+      setCopyEmailFeedback('');
+    }, 2500);
   };
 
   return (
@@ -60,19 +83,23 @@ export const Contact: React.FC = () => {
                   <div className="flex-1 min-w-0">
                     <span className="text-xs text-slate-400 block font-medium">E-mail Profissional</span>
                     <a
-                      href={`mailto:${personalInfo.email}`}
+                      href={professionalLinks.email.url}
                       className="text-white hover:text-cyan-400 font-semibold truncate block transition-colors"
                     >
-                      {personalInfo.email}
+                      {professionalLinks.email.address}
                     </a>
                   </div>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800 rounded-lg transition-colors"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800 rounded-lg transition-colors"
+                    aria-label={copiedEmail ? 'E-mail copiado' : 'Copiar e-mail'}
                     title="Copiar e-mail"
                   >
                     {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                   </button>
+                  <span className="sr-only" aria-live="polite">
+                    {copyEmailFeedback}
+                  </span>
                 </div>
 
                 {/* Location Item */}
@@ -89,36 +116,36 @@ export const Contact: React.FC = () => {
 
                 {/* LinkedIn Item */}
                 <a
-                  href={personalInfo.linkedin}
+                  href={professionalLinks.linkedin.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-colors group"
                 >
-                  <div className="p-2.5 rounded-lg bg-sky-950 border border-sky-500/30 text-sky-400">
+                  <div className="flex-shrink-0 p-2.5 rounded-lg bg-sky-950 border border-sky-500/30 text-sky-400">
                     <Linkedin className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs text-slate-400 block font-medium">LinkedIn</span>
-                    <span className="text-white group-hover:text-cyan-400 font-semibold transition-colors">
-                      in/murilo-henrique
+                    <span className="block break-all sm:break-normal text-white group-hover:text-cyan-400 font-semibold transition-colors">
+                      {professionalLinks.linkedin.label}
                     </span>
                   </div>
                 </a>
 
                 {/* GitHub Item */}
                 <a
-                  href={personalInfo.github}
+                  href={professionalLinks.github.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-colors group"
                 >
-                  <div className="p-2.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
+                  <div className="flex-shrink-0 p-2.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
                     <Github className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs text-slate-400 block font-medium">GitHub</span>
-                    <span className="text-white group-hover:text-cyan-400 font-semibold transition-colors">
-                      github.com/murilopes007
+                    <span className="block break-all sm:break-normal text-white group-hover:text-cyan-400 font-semibold transition-colors">
+                      {professionalLinks.github.label}
                     </span>
                   </div>
                 </a>
@@ -136,31 +163,11 @@ export const Contact: React.FC = () => {
                   Enviar Mensagem
                 </h3>
                 <p className="text-slate-400 text-xs sm:text-sm">
-                  Preencha os campos abaixo para iniciar uma conversa diretamente com Murilo Henrique.
+                  Preencha os campos abaixo para iniciar uma conversa diretamente com {personalInfo.name}.
                 </p>
               </div>
 
-              {submitted ? (
-                <div className="p-6 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-center space-y-3 animate-fadeIn">
-                  <div className="w-12 h-12 rounded-full bg-cyan-950 border border-cyan-500/40 text-cyan-400 flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-lg font-bold text-white">Mensagem Registrada!</h4>
-                  <p className="text-slate-300 text-sm max-w-md mx-auto">
-                    Obrigado pelo contato! Nesta versão demonstrativa do portfólio, o formulário é visual.
-                  </p>
-                  <p className="text-xs text-cyan-300 pt-2 border-t border-cyan-900/60">
-                    A funcionalidade de envio automático de e-mails será configurada posteriormente no servidor. Para um contato imediato, envie um e-mail para <strong className="text-white">{personalInfo.email}</strong>.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-2 px-4 py-2 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
-                  >
-                    Enviar outra mensagem
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-300">
@@ -226,7 +233,7 @@ export const Contact: React.FC = () => {
                   {/* Informational badge */}
                   <div className="flex items-center space-x-2 text-[11px] text-slate-400 bg-slate-900/60 p-3 rounded-lg border border-slate-800">
                     <Info className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                    <span>A funcionalidade de envio direto por formulário será integrada ao serviço de e-mail posteriormente.</span>
+                    <span>Ao continuar, seu cliente de e-mail será aberto com a mensagem preenchida. Nenhum dado é enviado diretamente pelo site.</span>
                   </div>
 
                   <button
@@ -235,10 +242,9 @@ export const Contact: React.FC = () => {
                     className="w-full inline-flex items-center justify-center space-x-2 px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 via-sky-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-xl shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Enviar Mensagem</span>
+                    <span>Abrir no cliente de e-mail</span>
                   </button>
                 </form>
-              )}
 
             </div>
           </div>

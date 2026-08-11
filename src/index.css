@@ -5,6 +5,10 @@
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
+
+  main section[id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 /* Custom subtle scrollbar */
@@ -45,3 +49,21 @@
   transform: translateY(-2px);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .glass-card-hover:hover {
+    transform: none;
+  }
+}

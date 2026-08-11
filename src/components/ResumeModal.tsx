@@ -1,81 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { personalInfo, experiences } from '../data/portfolioData';
-import { X, FileText, Download, Copy, Check, Briefcase, GraduationCap, Award, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { coreTechnologies, personalInfo, professionalLinks, resumeDocument } from '../data/portfolioData';
+import { X, FileText, Download, Copy, Check, Briefcase, Award, MapPin, Mail } from 'lucide-react';
+import { useAccessibleModal } from '../hooks/useAccessibleModal';
 
 interface ResumeModalProps {
   isOpen: boolean;
   onClose: () => void;
+  returnFocusTo?: HTMLElement | null;
 }
 
-export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+export const ResumeModal: React.FC<ResumeModalProps> = ({
+  isOpen,
+  onClose,
+  returnFocusTo,
+}) => {
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  const [copyFeedback, setCopyFeedback] = useState('');
+  const dialogRef = useAccessibleModal({ isOpen, onClose, returnFocusTo });
 
   if (!isOpen) return null;
 
-  const handleCopySummary = () => {
+  const handleCopySummary = async () => {
     const text = `
-Murilo Henrique — Desenvolvedor de Software (~4 anos de experiência)
+${personalInfo.name} — ${personalInfo.experienceStatement}
 Localização: ${personalInfo.location} (${personalInfo.availability})
-E-mail: ${personalInfo.email}
-LinkedIn: ${personalInfo.linkedin}
-GitHub: ${personalInfo.github}
+E-mail: ${professionalLinks.email.address}
+LinkedIn: ${professionalLinks.linkedin.url}
+GitHub: ${professionalLinks.github.url}
 
 Resumo Profissional:
 ${personalInfo.bio}
 
 Principais Tecnologias:
-Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQL, Supabase, APIs REST, Git.
+${coreTechnologies.join(', ')}.
     `.trim();
 
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
+    setCopied(false);
 
-  const handleDownloadMockPdf = () => {
-    // Generate clean text resume file download
-    const element = document.createElement("a");
-    const file = new Blob([
-      `==================================================\n` +
-      `CURRÍCULO PROFISSIONAL - MURILO HENRIQUE\n` +
-      `==================================================\n\n` +
-      `Cargo: Desenvolvedor de Software\n` +
-      `Experiência: ~4 Anos\n` +
-      `Localização: ${personalInfo.location}\n` +
-      `Disponibilidade: ${personalInfo.availability}\n` +
-      `E-mail: ${personalInfo.email}\n` +
-      `LinkedIn: ${personalInfo.linkedin}\n` +
-      `GitHub: ${personalInfo.github}\n\n` +
-      `RESUMO PROFISSIONAL:\n` +
-      `${personalInfo.bio}\n\n` +
-      `EXPERIÊNCIAS PROFISSIONAIS:\n` +
-      experiences.map(e => `\n- ${e.company} (${e.period})\n  Cargo: ${e.role}\n  Responsabilidades:\n${e.responsibilities.map(r => `    * ${r}`).join('\n')}\n  Tecnologias: ${e.technologies.join(', ')}`).join('\n') +
-      `\n\n==================================================\n` +
-      `Gerado via Portfólio Profissional de Murilo Henrique\n`
-    ], { type: 'text/plain;charset=utf-8' });
-    element.href = URL.createObjectURL(file);
-    element.download = "Curriculo_Murilo_Henrique_Desenvolvedor.txt";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API indisponível');
+      }
+
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setCopyFeedback('Resumo copiado para a área de transferência.');
+    } catch {
+      setCopyFeedback(
+        'Não foi possível copiar o resumo. Selecione o conteúdo e copie manualmente.',
+      );
+    }
+
+    setTimeout(() => {
+      setCopied(false);
+      setCopyFeedback('');
+    }, 2500);
   };
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto animate-fadeIn"
       onClick={onClose}
       aria-modal="true"
@@ -92,13 +77,14 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
           <div className="flex items-center space-x-2.5 text-cyan-400 font-bold">
             <FileText className="w-5 h-5" />
             <h2 id="resume-modal-title" className="text-lg font-bold text-white">
-              Currículo Profissional — Murilo Henrique
+              Currículo Profissional — {personalInfo.name}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-            aria-label="Fechar modal"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            aria-label="Fechar currículo"
+            data-modal-initial-focus
           >
             <X className="w-5 h-5" />
           </button>
@@ -112,7 +98,7 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
               <div>
                 <h3 className="text-lg font-bold text-white">{personalInfo.name}</h3>
-                <p className="text-xs text-cyan-400 font-semibold">{personalInfo.role} (~4 anos exp)</p>
+                <p className="text-xs text-cyan-400 font-semibold">{personalInfo.role} (desde {personalInfo.careerStartYear})</p>
               </div>
               <span className="text-xs px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-medium">
                 {personalInfo.availability}
@@ -126,7 +112,7 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{personalInfo.email}</span>
+                <span>{professionalLinks.email.address}</span>
               </div>
             </div>
           </div>
@@ -149,8 +135,8 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
               <span>Principais Competências Técnicas</span>
             </h4>
             <div className="flex flex-wrap gap-1.5 pt-1">
-              {['Flutter', 'Dart', 'Ionic', 'Angular', 'React', 'TypeScript', 'JavaScript', 'Laravel', 'PHP', 'MySQL', 'Supabase', 'APIs REST', 'Git'].map((item, idx) => (
-                <span key={idx} className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-900 text-cyan-300 border border-slate-800">
+              {coreTechnologies.map((item) => (
+                <span key={item} className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-900 text-cyan-300 border border-slate-800">
                   {item}
                 </span>
               ))}
@@ -163,19 +149,25 @@ Flutter, Dart, Ionic, Angular, React, TypeScript, JavaScript, Laravel, PHP, MySQ
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-6 py-4 bg-[#0d1322] border-t border-slate-800">
           <button
             onClick={handleCopySummary}
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+            className="w-full min-h-11 sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-cyan-400" />}
-            <span>{copied ? 'Copiado para a área de transferência!' : 'Copiar Resumo'}</span>
+            <span>
+              {copied ? 'Copiado para a área de transferência!' : 'Copiar Resumo'}
+            </span>
           </button>
+          <span className="sr-only" aria-live="polite">
+            {copyFeedback}
+          </span>
 
-          <button
-            onClick={handleDownloadMockPdf}
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-lg shadow-md transition-all"
+          <a
+            href={resumeDocument.url}
+            download={resumeDocument.filename}
+            className="w-full min-h-11 sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-lg shadow-md transition-all"
           >
             <Download className="w-4 h-4" />
-            <span>Baixar Currículo (.txt / PDF)</span>
-          </button>
+            <span>Baixar Currículo em PDF</span>
+          </a>
         </div>
 
       </div>

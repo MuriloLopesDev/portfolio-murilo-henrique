@@ -1,13 +1,14 @@
 import React from 'react';
-import { personalInfo } from '../data/portfolioData';
-import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Sparkles, Smartphone, Monitor, Globe } from 'lucide-react';
+import { personalInfo, professionalLinks, professionalPhoto } from '../data/portfolioData';
+import { ArrowRight, Mail, Linkedin, Github, MapPin, CheckCircle2, Smartphone, Monitor, Globe } from 'lucide-react';
+import { getPreferredScrollBehavior } from '../utils/motion';
 
 export const Hero: React.FC = () => {
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: getPreferredScrollBehavior() });
     }
   };
 
@@ -98,26 +99,26 @@ export const Hero: React.FC = () => {
             {/* Social Links */}
             <div className="pt-2 flex items-center justify-center lg:justify-start space-x-4">
               <a
-                href={personalInfo.linkedin}
+                href={professionalLinks.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Perfil do LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href={personalInfo.github}
+                href={professionalLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Perfil do GitHub"
               >
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href={`mailto:${personalInfo.email}`}
-                className="p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
+                href={professionalLinks.email.url}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center p-2.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors border border-slate-800"
                 aria-label="Enviar e-mail"
               >
                 <Mail className="w-5 h-5" />
@@ -134,20 +135,28 @@ export const Hero: React.FC = () => {
               
               <div className="relative glass-card rounded-2xl p-6 sm:p-8 space-y-6">
                 
-                {/* Photo Placeholder / Avatar Card */}
-                <div className="relative aspect-square max-w-[240px] mx-auto rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/60 flex flex-col items-center justify-center p-6 text-center shadow-inner group">
-                  <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-cyan-500/40 flex items-center justify-center shadow-lg mb-3 text-cyan-400 font-extrabold text-2xl tracking-wider">
-                    MH
+                {/* Professional photo card */}
+                <div className="relative aspect-square max-w-[240px] mx-auto overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/60 text-center shadow-inner group">
+                  <img
+                    src={professionalPhoto.src}
+                    alt={professionalPhoto.alt}
+                    width={professionalPhoto.width}
+                    height={professionalPhoto.height}
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                    className="h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent px-5 pb-5 pt-12">
+                    <p className="text-white font-bold text-lg">{personalInfo.name}</p>
+                    <p className="text-slate-300 text-xs mt-0.5">{personalInfo.role}</p>
                   </div>
-                  <h3 className="text-white font-bold text-lg">{personalInfo.name}</h3>
-                  <p className="text-slate-400 text-xs mt-0.5">{personalInfo.role}</p>
-                  <p className="text-slate-500 text-[11px] mt-2 italic">Foto profissional</p>
                 </div>
 
                 {/* Quick Highlights Grid */}
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
-                    <span className="block text-xl font-extrabold text-cyan-400">~4 anos</span>
+                    <span className="block text-xl font-extrabold text-cyan-400">{personalInfo.experienceLabel}</span>
                     <span className="text-[12px] text-slate-400 font-medium">Experiência Real</span>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
