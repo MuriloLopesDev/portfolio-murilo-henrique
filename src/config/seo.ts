@@ -4,7 +4,7 @@ export const seoConfig = {
   siteUrlEnvironmentVariable: 'VITE_SITE_URL',
   localSiteUrl: 'http://localhost:3000',
   title: `${personalInfo.name} | ${personalInfo.role}`,
-  description: `Portfólio de ${personalInfo.name}, ${personalInfo.role} com experiência profissional desde 2019 em aplicações web, mobile e desktop.`,
+  description: `Portfólio de ${personalInfo.name}, profissional de tecnologia desde 2019, com experiência em suporte, infraestrutura e desenvolvimento de aplicações web, mobile e desktop.`,
   author: personalInfo.name,
   locale: 'pt_BR',
   language: 'pt-BR',

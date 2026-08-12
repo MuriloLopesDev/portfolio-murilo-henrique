@@ -6,23 +6,23 @@ export const About: React.FC = () => {
   const highlights = [
     {
       icon: Code2,
-      title: 'Desenvolvimento Multiplataforma',
-      description: 'Criação e manutenção de soluções para Web, Mobile (iOS e Android) e Desktop (Windows).',
+      title: 'Web, mobile e desktop',
+      description: 'Experiência no desenvolvimento e na manutenção de aplicações para diferentes plataformas.',
     },
     {
       icon: Wrench,
-      title: 'Evolução de Sistemas Reais',
-      description: 'Atuação constante na correção de inconsistências, refatoração e implementação de novas regras de negócio.',
+      title: 'Sistemas existentes',
+      description: 'Leitura de código, correção de problemas e implementação de melhorias em projetos em andamento.',
     },
     {
       icon: Database,
-      title: 'Frontend, Backend e Dados',
-      description: 'Compreensão completa do fluxo de software: interface, comunicação com APIs REST e persistência em banco de dados.',
+      title: 'Frontend, backend e dados',
+      description: 'Trabalho com interfaces, APIs, regras de negócio e bancos de dados.',
     },
     {
       icon: Cpu,
-      title: 'IA como Apoio Estratégico',
-      description: 'Utilização responsável de ferramentas de inteligência artificial para otimizar pesquisas, refinamento e documentação.',
+      title: 'Adaptação ao projeto',
+      description: 'Uso diferentes tecnologias conforme a necessidade do sistema e do time.',
     },
   ];
 
@@ -37,10 +37,10 @@ export const About: React.FC = () => {
             <span>Sobre Mim</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Desenvolvedor focado em soluções práticas e confiáveis
+            Uma trajetória entre suporte e desenvolvimento
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            Conheça minha trajetória profissional, modo de trabalho e compromisso técnico com a entrega de software de qualidade.
+            Minha experiência começou perto dos usuários e dos problemas do dia a dia antes de avançar para o desenvolvimento de aplicações.
           </p>
         </div>
 
@@ -51,16 +51,13 @@ export const About: React.FC = () => {
           <div className="lg:col-span-7 space-y-6 text-slate-300 text-base leading-relaxed">
             <div className="glass-card rounded-2xl p-6 sm:p-8 space-y-5 border border-slate-800">
               <p>
-                Atuo profissionalmente <strong className="text-white">desde {personalInfo.careerStartYear}</strong> no desenvolvimento, suporte e manutenção de sistemas de software. Durante esse período, adquiri experiência prática na construção de aplicações <strong className="text-cyan-400">mobile, web e desktop</strong>, lidando diretamente com desafios reais de negócios e fluxos de trabalho do dia a dia.
+                Comecei na área de tecnologia em <strong className="text-white">{personalInfo.careerStartYear}</strong>, trabalhando com suporte e infraestrutura. Esse período me deu contato direto com clientes, servidores, sistemas e problemas operacionais que precisavam ser acompanhados até a solução.
               </p>
               <p>
-                Minha atuação engloba tanto o <strong className="text-white">frontend</strong> quanto o <strong className="text-white">backend</strong>, cobrindo desde a estruturação visual e navegação do usuário até a integração com APIs RESTful, tratamento de regras de negócio e persistência em bancos de dados relacionais e serviços como Supabase.
+                Depois, passei a atuar profissionalmente com desenvolvimento de software. Desde então, trabalho com aplicações <strong className="text-cyan-400">web, mobile e desktop</strong>, criando funcionalidades e lidando com APIs, regras de negócio, bancos de dados e sistemas em produção.
               </p>
               <p>
-                Tenho facilidade e disciplina para me adaptar a bases de código existentes, atuando na <strong className="text-white">investigação analítica de causa raiz de bugs</strong> para resolver falhas na origem e implementar melhorias sem interromper o funcionamento das operações existentes.
-              </p>
-              <p>
-                Acredito que o verdadeiro valor da tecnologia está em criar soluções simples, estáveis e fáceis de usar. Para isso, utilizo <strong className="text-white">inteligência artificial como ferramenta de apoio</strong> para acelerar refinamentos e produtividade, mantendo sempre o rigor técnico, o controle sobre a arquitetura e a segurança do código.
+                Hoje, boa parte do meu trabalho envolve entender código existente, investigar problemas e implementar mudanças com cuidado. Atuo no <strong className="text-white">frontend e no backend</strong> quando necessário, escolhendo as ferramentas de acordo com o contexto do projeto.
               </p>
             </div>
 
@@ -68,24 +65,24 @@ export const About: React.FC = () => {
             <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-3">
               <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
                 <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                <span>Atuação Profissional Pautada Em</span>
+                <span>Como trabalho</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300 pt-1">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Código limpo e sustentável</span>
+                  <span>Clareza na implementação</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Investigação rigorosa de causas raiz</span>
+                  <span>Cuidado com sistemas em produção</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Pontualidade e responsabilidade</span>
+                  <span>Comunicação sobre problemas e decisões</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Foco no usuário final</span>
+                  <span>Atenção à experiência de uso</span>
                 </div>
               </div>
             </div>

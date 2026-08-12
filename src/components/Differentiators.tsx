@@ -31,13 +31,13 @@ export const Differentiators: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-950/60 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
             <Award className="w-3.5 h-3.5" />
-            <span>Perfil Atitudinal</span>
+            <span>Como trabalho</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Diferenciais Profissionais
+            Experiência na prática
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            Postura técnica, comprometimento com o negócio e práticas de desenvolvimento refinadas no mercado.
+            Características construídas no trabalho com diferentes sistemas, equipes e contextos.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export const Differentiators: React.FC = () => {
 
                 <div className="pt-3 border-t border-slate-800/80 flex items-center space-x-2 text-xs text-cyan-400 font-medium">
                   <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                  <span>Atuação prática comprovada</span>
+                  <span>Parte do trabalho no dia a dia</span>
                 </div>
               </div>
             );

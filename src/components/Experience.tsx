@@ -17,7 +17,7 @@ export const Experience: React.FC = () => {
             Experiência Profissional
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            Histórico de atuação com desenvolvimento de software, manutenção de ecossistemas e entrega de soluções em empresas de tecnologia.
+            Experiência iniciada em suporte e infraestrutura, com evolução para o desenvolvimento de aplicações e sistemas em produção.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export const Experience: React.FC = () => {
                   <div className="pt-5 space-y-3">
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center space-x-1.5">
                       <ChevronRight className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>Responsabilidades e Atividades</span>
+                      <span>Principais responsabilidades</span>
                     </h4>
                     
                     <ul className="grid grid-cols-1 gap-2.5">

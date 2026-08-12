@@ -76,7 +76,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           {/* Quick Info Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-              <span className="text-xs text-slate-400 font-medium">Status do Projeto</span>
+              <span className="text-xs text-slate-400 font-medium">Status</span>
               <p className="text-sm font-semibold text-emerald-400 flex items-center space-x-1.5">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>{project.status}</span>
@@ -98,7 +98,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="space-y-3">
             <h3 className="text-base font-bold text-white flex items-center space-x-2">
               <Globe className="w-4 h-4 text-cyan-400" />
-              <span>Contexto / Problema</span>
+              <span>Contexto</span>
             </h3>
             <p className="text-slate-300 leading-relaxed text-base">{project.caseStudy.context}</p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
@@ -115,7 +115,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="p-5 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-2">
             <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
               <Lightbulb className="w-4 h-4" />
-              <span>Solução Desenvolvida</span>
+              <span>O que eu fiz</span>
             </h3>
             <p className="text-slate-200 text-sm leading-relaxed">{project.caseStudy.solution}</p>
           </div>
@@ -124,7 +124,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="p-5 rounded-xl bg-cyan-950/20 border border-cyan-500/20 space-y-2">
             <h3 className="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center space-x-2">
               <Award className="w-4 h-4" />
-              <span>Minha Participação</span>
+              <span>Minha atuação</span>
             </h3>
             <p className="text-slate-200 text-sm leading-relaxed">{project.caseStudy.participation}</p>
           </div>
@@ -133,7 +133,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="space-y-3">
             <h3 className="text-base font-bold text-white flex items-center space-x-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Funcionalidades Principais</span>
+              <span>Principais entregas</span>
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {project.caseStudy.features.map((feature) => (
@@ -149,7 +149,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="space-y-3">
             <h3 className="text-base font-bold text-white flex items-center space-x-2">
               <Cpu className="w-4 h-4 text-indigo-400" />
-              <span>Desafios Técnicos Enfrentados</span>
+              <span>Desafios do projeto</span>
             </h3>
             <ul className="space-y-2">
               {project.caseStudy.technicalChallenges.map((challenge) => (
@@ -165,7 +165,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="space-y-3">
             <h3 className="text-base font-bold text-white flex items-center space-x-2">
               <Layers className="w-4 h-4 text-sky-400" />
-              <span>Tecnologias Utilizadas</span>
+              <span>Tecnologias</span>
             </h3>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
@@ -184,9 +184,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-white flex items-center space-x-2">
                 <ImageIcon className="w-4 h-4 text-cyan-400" />
-                <span>Galeria de Telas do Projeto</span>
+                <span>Telas do projeto</span>
               </h3>
-              <span className="text-xs text-slate-400">{project.gallery.length} telas mapeadas</span>
+              <span className="text-xs text-slate-400">{project.gallery.length} telas</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

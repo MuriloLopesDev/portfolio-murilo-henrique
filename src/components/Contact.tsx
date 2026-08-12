@@ -54,13 +54,13 @@ export const Contact: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
             <Mail className="w-3.5 h-3.5" />
-            <span>Vamos Conversar</span>
+            <span>Contato</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Entre em Contato
+            Vamos conversar
           </h2>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
-            Estou aberto a novas oportunidades, projetos e conversas sobre tecnologia. Entre em contato para conhecer melhor meu trabalho.
+            Se quiser saber mais sobre meu trabalho ou conversar sobre um projeto, entre em contato por e-mail ou LinkedIn.
           </p>
         </div>
 
@@ -81,7 +81,7 @@ export const Contact: React.FC = () => {
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-xs text-slate-400 block font-medium">E-mail Profissional</span>
+                    <span className="text-xs text-slate-400 block font-medium">E-mail</span>
                     <a
                       href={professionalLinks.email.url}
                       className="text-white hover:text-cyan-400 font-semibold truncate block transition-colors"
@@ -110,7 +110,7 @@ export const Contact: React.FC = () => {
                   <div>
                     <span className="text-xs text-slate-400 block font-medium">Localização</span>
                     <p className="text-white font-semibold">{personalInfo.location}</p>
-                    <p className="text-xs text-emerald-400 mt-0.5 font-medium">{personalInfo.availability}</p>
+                    <p className="text-xs text-emerald-400 mt-0.5 font-medium">Atuação em tecnologia desde 2019</p>
                   </div>
                 </div>
 
@@ -160,10 +160,10 @@ export const Contact: React.FC = () => {
               
               <div className="space-y-1">
                 <h3 className="text-xl font-bold text-white tracking-tight">
-                  Enviar Mensagem
+                  Enviar mensagem
                 </h3>
                 <p className="text-slate-400 text-xs sm:text-sm">
-                  Preencha os campos abaixo para iniciar uma conversa diretamente com {personalInfo.name}.
+                  Escreva sua mensagem e escolha o melhor canal para continuar a conversa.
                 </p>
               </div>
 
@@ -171,7 +171,7 @@ export const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-300">
-                        Seu Nome *
+                        Nome *
                       </label>
                       <input
                         id="contact-name"
@@ -186,7 +186,7 @@ export const Contact: React.FC = () => {
 
                     <div className="space-y-1.5">
                       <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-300">
-                        Seu E-mail *
+                        E-mail *
                       </label>
                       <input
                         id="contact-email"
@@ -210,14 +210,14 @@ export const Contact: React.FC = () => {
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      placeholder="Ex: Oportunidade de Desenvolvedor Mobile / Web"
+                      placeholder="Projeto, oportunidade ou outro assunto"
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
                     />
                   </div>
 
                   <div className="space-y-1.5">
                     <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-300">
-                      Sua Mensagem *
+                      Mensagem *
                     </label>
                     <textarea
                       id="contact-message"
@@ -225,7 +225,7 @@ export const Contact: React.FC = () => {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Escreva sua mensagem ou detalhes sobre a oportunidade..."
+                      placeholder="Escreva sua mensagem"
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none"
                     />
                   </div>
@@ -233,7 +233,7 @@ export const Contact: React.FC = () => {
                   {/* Informational badge */}
                   <div className="flex items-center space-x-2 text-[11px] text-slate-400 bg-slate-900/60 p-3 rounded-lg border border-slate-800">
                     <Info className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                    <span>Ao continuar, seu cliente de e-mail será aberto com a mensagem preenchida. Nenhum dado é enviado diretamente pelo site.</span>
+                    <span>Prefere outro canal? Meu e-mail e LinkedIn estão ao lado.</span>
                   </div>
 
                   <button
@@ -242,7 +242,7 @@ export const Contact: React.FC = () => {
                     className="w-full inline-flex items-center justify-center space-x-2 px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 via-sky-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 rounded-xl shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Abrir no cliente de e-mail</span>
+                    <span>Continuar por e-mail</span>
                   </button>
                 </form>
 

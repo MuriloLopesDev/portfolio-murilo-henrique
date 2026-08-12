@@ -49,7 +49,7 @@ export const Hero: React.FC = () => {
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl font-semibold text-slate-200 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              "{personalInfo.heroSubtitle}"
+              {personalInfo.heroSubtitle}
             </p>
 
             {/* Short Description */}
@@ -157,11 +157,11 @@ export const Hero: React.FC = () => {
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
                     <span className="block text-xl font-extrabold text-cyan-400">{personalInfo.experienceLabel}</span>
-                    <span className="text-[12px] text-slate-400 font-medium">Experiência Real</span>
+                    <span className="text-[12px] text-slate-400 font-medium">Experiência em tecnologia</span>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
-                    <span className="block text-xl font-extrabold text-indigo-400">Full Stack</span>
-                    <span className="text-[12px] text-slate-400 font-medium">Front, Back & Mobile</span>
+                    <span className="block text-xl font-extrabold text-indigo-400">Multiplataforma</span>
+                    <span className="text-[12px] text-slate-400 font-medium">Web, Mobile e Desktop</span>
                   </div>
                 </div>
 
@@ -177,7 +177,7 @@ export const Hero: React.FC = () => {
                   </li>
                   <li className="flex items-center space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                    <span>Investigação analítica de causa raiz de bugs</span>
+                    <span>Investigação e correção de problemas</span>
                   </li>
                 </ul>
 

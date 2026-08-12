@@ -24,7 +24,7 @@ export const Projects: React.FC = () => {
             Projetos Selecionados
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            Aplicações desenvolvidas para atender necessidades reais de usuários e clientes, com foco em estabilidade, design e usabilidade.
+            Projetos em que trabalhei do entendimento do problema à entrega da aplicação.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ export const Projects: React.FC = () => {
                   {/* Highlights Bullet List */}
                   <div className="space-y-2 pt-2 border-t border-slate-800/80">
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                      Principais Destaques
+                      Principais entregas
                     </h4>
                     <ul className="space-y-1.5 text-xs text-slate-300">
                       {proj.caseStudy.features.slice(0, 3).map((feat) => (
@@ -102,7 +102,7 @@ export const Projects: React.FC = () => {
                   onClick={(event) => setSelection({ project: proj, trigger: event.currentTarget })}
                   className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 >
-                  <span>Ver detalhes do projeto</span>
+                  <span>Ver case do projeto</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

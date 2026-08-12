@@ -28,13 +28,13 @@ export const Technologies: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Ecossistema Técnico</span>
+            <span>Tecnologias</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Tecnologias & Ferramentas
+            Tecnologias que utilizo
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            Tecnologias utilizadas no desenvolvimento de soluções web, mobile e desktop no dia a dia profissional.
+            Ferramentas com as quais trabalho em aplicações web, mobile e desktop.
           </p>
         </div>
 

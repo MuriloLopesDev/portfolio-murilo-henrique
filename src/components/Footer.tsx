@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
           <p>© {currentYear} {personalInfo.name}. Todos os direitos reservados.</p>
-          <p>Portfólio Profissional — Desenvolvido em React & TypeScript.</p>
+          <p>Feito com React e TypeScript.</p>
         </div>
 
       </div>
